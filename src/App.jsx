@@ -18,7 +18,7 @@ const DEFAULT_BG = {
 
 const BG_BY_ROUTE = {
   "/": { src: "/videos/background.webm", poster: "/images/cover-page/background.webp", loop: true },
-  "/home": { src: "/videos/homepage-background.webm", poster: "/images/cover-page/background.webp", loop: true },
+  "/home": { src: "/videos/homepage-background.mp4", poster: "/images/cover-page/background.webp", loop: true },
 };
 
 // --- Detect UUID-like or invitation routes ---

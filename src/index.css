@@ -10,6 +10,16 @@
   font-synthesis-style: none;
 }
 
+@font-face {
+  font-family: 'KhAngTaPenh';
+  src: url('/fonts/KhAngTaPenh.woff2') format('woff2');
+  font-weight: 400;      /* set actual weight if you know it */
+  font-style: normal;    /* change to italic if that’s what this file is */
+  font-display: swap;
+
+}
+
+
 @import "tailwindcss";
 
 @theme {
@@ -117,6 +127,11 @@ body,
   }
   .font-celinda {
     font-family: "Celinda", serif;
+  }
+  .font-khangtapenh {
+    font-family: "KhAngTaPenh", "Noto Sans Khmer", "Khmer OS", system-ui, sans-serif;
+    font-weight: 400;
+    font-style: normal;
   }
 }
 

@@ -6,7 +6,7 @@ import { list, put } from "@vercel/blob";
 // ===== Config =====
 const PREFIX = "wishes/items/";            // per-item files live here
 const LEGACY_AGG = "wishes/wishes.json";   // optional legacy single-file path (read-only fallback)
-const token = process.env.STAGE-NARY-HONGKIM; // ensure set in the right Vercel env
+const token = process.env.BLOB_READ_WRITE_TOKEN; // ensure set in the right Vercel env
 const PUBLIC_WISHES_URL = process.env.WISHES_JSON_URL || ""; // legacy public URL (optional)
 
 // API responses are uncached (blob files can be cached; each file is immutable)

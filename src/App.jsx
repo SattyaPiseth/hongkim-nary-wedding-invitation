@@ -11,7 +11,7 @@ const STORY_VIDEOS = ["/videos/home.webm"];
 const BGMUSIC = "/audio/special-someone-audio.mp3";
 
 const DEFAULT_BG = {
-  src: "/videos/homepage-background.webm",
+  src: "/videos/homepage-background.mp4",
   poster: "/images/cover-page/background.webp",
   loop: true,
 };

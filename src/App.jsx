@@ -11,14 +11,14 @@ const STORY_VIDEOS = ["/videos/home.webm"];
 const BGMUSIC = "/audio/special-someone-audio.mp3";
 
 const DEFAULT_BG = {
-  src: "/videos/homepage-background.mp4",
+  src: "/videos/homepage-background.mp",
   poster: "/images/cover-page/background.webp",
   loop: true,
 };
 
 const BG_BY_ROUTE = {
   "/": { src: "/videos/background.webm", poster: "/images/cover-page/background.webp", loop: true },
-  "/home": { src: "/videos/homepage-background.mp4", poster: "/images/cover-page/background.webp", loop: true },
+  "/home": { src: "/videos/homepage-background.mp", poster: "/images/cover-page/background.webp", loop: true },
 };
 
 // --- Detect UUID-like or invitation routes ---

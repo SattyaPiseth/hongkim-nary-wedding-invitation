@@ -5,11 +5,12 @@ import { MasonryGallery } from "./gallery/MasonryGallery";
 import { Lightbox } from "./modal/Lightbox";
 
 import { GALLERY_IMAGES } from "../data/galleryImages";
-import morning_event_image from "/images/home-page/agenda/agenda-01.avif";
+import morning_event_image from "/images/home-page/agenda/agenda-01.webp";
 import { GratitudeSection } from "./GratitudeSection";
 import PromoteSection from "./PromoteSection";
 import Discussion from "./comment/Discussion";
 import AnimatedActionButton from "./button/AnimatedActionButton";
+import Spinner from "./button/Spinner";
 
 export default function DescriptionSection({
   // Customizable props with safe defaults
@@ -23,6 +24,9 @@ export default function DescriptionSection({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [idx, setIdx] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+
 
   const totalImages = galleryImages.length;
   const open = (i) => { setIdx(i); setIsOpen(true); };
@@ -136,7 +140,7 @@ export default function DescriptionSection({
             {/* Bigger English gratitude image */}
             <div className="mx-auto my-[2vh] max-w-screen-md flex justify-center" data-aos="fade-up">
               <img
-                src="/images/home-page/gratitude/gratitude-english.avif"
+                src="/images/home-page/gratitude/gratitude-english.webp"
                 alt="Gratitude in English"
                 className="w-[clamp(20rem,90vw,50rem)] h-auto object-contain"
                 loading="lazy"
@@ -230,9 +234,30 @@ export default function DescriptionSection({
 
 
         {/* Event posters */}
-        <figure>
-          <img src={morning_event_image} alt="Morning event" loading="lazy" decoding="async" data-aos="fade-up"/>
+        <figure className="my-[10vh] flex justify-center py-20" data-aos="zoom-in">
+          <div className="relative w-full">
+            {/* Spinner while loading */}
+            {!loaded && (
+              <div className="absolute inset-0 grid place-items-center">
+                <Spinner label="Loading image..." size="lg" />
+              </div>
+            )}
+
+            {/* Poster image */}
+            <img
+              src={morning_event_image}
+              alt="Morning event"
+              onLoad={() => setLoaded(true)}
+              onError={() => setLoadError(true)}
+              className={`block w-full h-auto origin-center transition-all duration-700 ease-out
+                ${loaded ? "opacity-100 scale-[1.3]" : "opacity-0 scale-[1.15]"}`}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         </figure>
+
+
 
         {/* <figure className="-mt-5 py-2 ">
           <img src={afternoon_event_image} alt="Afternoon event" loading="lazy" decoding="async" />

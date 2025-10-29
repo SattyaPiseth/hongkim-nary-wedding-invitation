@@ -46,7 +46,9 @@ export default function CoverPage() {
           googleBot={!indexable ? "noindex, nofollow, noarchive" : undefined}
           bingBot={!indexable ? "noindex, nofollow, noarchive" : undefined}
         />
-        <div className="min-h-[70svh] grid place-items-center"> <Spinner label="Preparing background…" size="lg" /> </div>
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-transparent translate-y-[5vh]">
+        <Spinner label="Preparing background…" size="lg" />
+      </div>
       </>
     );
   }

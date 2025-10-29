@@ -4,33 +4,28 @@ import Seo19 from "../components/Seo19.jsx";
 import CoverSection from "../components/base/CoverSection.jsx";
 import Spinner from "../components/button/Spinner.jsx";
 
-// If you created a shared Spinner, use this import:
-// import Spinner from "../components/ui/Spinner.jsx";
-
 export default function CoverPage() {
-  // 🔒 Lock scroll only while this route is mounted
-  useEffect(() => {
-    const html = document.documentElement;
-    const body = document.body;
-
-    const prevHtmlOverflow = html.style.overflow;
-    const prevBodyOverflow = body.style.overflow;
-
-    html.style.overflow = "hidden";
-    body.style.overflow = "hidden";
-
-    return () => {
-      html.style.overflow = prevHtmlOverflow;
-      body.style.overflow = prevBodyOverflow;
-    };
-  }, []);
-
   // Context and data
   const outlet = useOutletContext() ?? {};
   const mode = outlet.mode ?? "background";
   const startStory = outlet.startStory ?? (() => {});
   const isStoryPlaying = mode === "story";
   const bgPainted = outlet.bgPainted ?? false; // ⬅️ from App.jsx
+
+  // 🔒 Lock scroll only while background hasn't painted
+  useEffect(() => {
+    if (bgPainted) return;
+    const html = document.documentElement;
+    const body = document.body;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevBodyOverflow = body.style.overflow;
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    return () => {
+      html.style.overflow = prevHtmlOverflow;
+      body.style.overflow = prevBodyOverflow;
+    };
+  }, [bgPainted]);
 
   const data = useLoaderData() ?? {};
   const { indexable = true, seo = {}, customer = null } = data;
@@ -46,9 +41,17 @@ export default function CoverPage() {
           googleBot={!indexable ? "noindex, nofollow, noarchive" : undefined}
           bingBot={!indexable ? "noindex, nofollow, noarchive" : undefined}
         />
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-transparent -translate-y-10">
-        <Spinner label="Preparing background…" size="lg" />
-      </div>
+        <div
+          className="
+            fixed inset-0 z-[60] grid place-items-center
+            bg-black/5 supports-backdrop-blur:bg-black/5 backdrop-blur-[2px]
+          "
+        >
+          <div role="status" aria-live="polite" aria-busy="true">
+            <Spinner label="Preparing background…" size="lg" />
+            <p className="sr-only">Loading background media for the cover page.</p>
+          </div>
+        </div>
       </>
     );
   }
@@ -64,7 +67,7 @@ export default function CoverPage() {
         bingBot={!indexable ? "noindex, nofollow, noarchive" : undefined}
       />
 
-      <header className="-mt-[1.5rem]">
+           <header className="-mt-[1.5rem]">
         {!isStoryPlaying && (
           <>
             <img

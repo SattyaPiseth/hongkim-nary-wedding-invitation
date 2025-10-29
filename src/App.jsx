@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useNavigation } from "react-router-dom";
 import { useRef, useState, useEffect, useCallback, lazy, Suspense } from "react";
 import Seo19 from "./components/Seo19.jsx";
 import VideoLayer from "./components/video/VideoLayer.jsx";
@@ -36,6 +36,13 @@ const pickRouteBg = (pathname) => {
 };
 
 export default function App() {
+  const navigation = useNavigation();
+  const isRouting = navigation.state === "loading" || navigation.state === "submitting";
+
+   // Prefetch HomePage when story begins (so /home is instant later)
+   const preloadHome = useCallback(() => import("./pages/HomePage.jsx"), []);
+
+
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -164,7 +171,8 @@ export default function App() {
     await enableAudioNow();
     setStoryIndex(0);
     setMode("story");
-  }, [enableAudioNow]);
+    preloadHome();
+  }, [enableAudioNow, preloadHome]);
 
   useEffect(() => {
     if (mode === "story" && (storyIndex < 0 || storyIndex >= STORY_VIDEOS.length)) setStoryIndex(0);
@@ -254,9 +262,10 @@ export default function App() {
     const next = storyIndex + 1;
     if (next < STORY_VIDEOS.length) setStoryIndex(next);
     else {
+      // navigate first to avoid any intermediate CoverPage paint
+      if (pathname !== "/home") navigate("/home", { replace: true });
       setMode("background");
       setStoryIndex(0);
-      if (pathname !== "/home") navigate("/home", { replace: true });
     }
   }, [mode, storyIndex, navigate, pathname]);
 
@@ -327,6 +336,13 @@ export default function App() {
       <Suspense fallback={null}>
         <Overlay />
       </Suspense>
+
+      {/* Global route-transition overlay */}
+        {isRouting && (
+        <div className="fixed inset-0 z-[80] grid place-items-center bg-black/10 backdrop-blur-[2px]">
+          <span className="sr-only">Navigating…</span>
+        </div>
+      )}
 
       {showPlayMusic && (
         <Suspense fallback={null}>

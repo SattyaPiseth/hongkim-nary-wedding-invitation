@@ -1,10 +1,10 @@
 export default function ParentsSection({
   title = "ឪពុកម្តាយ",
   names = [
-    "លោក យាន សាវី",
-    "លោក ម៉ៅ ឆាយ",
-    "អ្នកស្រី ឈុន សេងហ៊ន់",
-    "អ្នកស្រី សៀង ឡា",
+    "លោក ស៊ឹម សារីម",
+    "លោក តាំង វ៉ា",
+    "អ្នកស្រី លី ខេង",
+    "អ្នកស្រី ម៉ាច ប៊ុននី",
   ],
   className = "animate-[fade-up_0.6s_ease-out]",
 }) {
@@ -39,14 +39,14 @@ export default function ParentsSection({
 
     return (
       <span className={`min-w-0 ${align === "right" ? "text-right" : ""}`}>
-        <span className="inline-block whitespace-nowrap break-keep">
+        <span className="inline-block whitespace-nowrap break-keep text-base">
           {honorific && (
-            <span className="moulpali-regular">
+            <span className="font-khangtapenh">
               {honorific}
               {person ? "\u00A0" : ""}
             </span>
           )}
-          {person && <span className="moul-regular">{personNbsp}</span>}
+          {person && <span className="font-khangtapenh">{personNbsp}</span>}
         </span>
       </span>
     );

@@ -13,12 +13,12 @@ import AnimatedActionButton from "./button/AnimatedActionButton";
 
 export default function DescriptionSection({
   // Customizable props with safe defaults
-  eventDateIso = import.meta.env.VITE_EVENT_DATE || "2025-11-06T17:00:00+07:00", // Cambodia +07:00
-  venueName = "ភោជនីយដ្ឋាន ទន្លេបាសាក់ (ក្បាលថ្នល់) ដោយមេត្រីភាព។ សូមអរគុណ!",
+  eventDateIso = import.meta.env.VITE_EVENT_DATE || "2025-11-30T17:00:00+07:00", // Cambodia +07:00
+  venueName = "ភោជនីយដ្ឋាន ឡាក់គី ប្រាយ ផ្លូវ៥៩៨ រាជធានីភ្នំពេញ ដោយមេត្រីភាព។ សូមអរគុណ!",
   startTimeText = "និងពិសាភោជនីយអាហារដែលនឹង <br/> ប្រព្រឹត្តទៅនៅ",
-  khmerDateText = "ថ្ងៃ ព្រហស្បត្តិ៍ ទី០៦ ខែវិច្ឆិកា ឆ្នាំ ២០២៥",
-  khmerBoranDateText = "ត្រូវនឹងថ្ងៃ ១រោច ខែកត្តិក ឆ្នាំម្សាញ់ <br/> សប្តស័ក ព.ស ២៥៦៩ វេលាម៉ោង ៥:០០ នាទីល្ងាច​ ស្ថិតនៅ",
-  mapHref = "https://maps.app.goo.gl/DKWSGcHmyNRoVdAc8",
+  khmerDateText = "ថ្ងៃ អាទិត្យ ១០ កើត ខែមិគសិរ ឆ្នាំម្សាញ់ សប្តស័ក ព.ស ២៥៦៩ ",
+  khmerBoranDateText = "ត្រូវនឹងថ្ងៃទី ៣០ ខែវិច្ឆិកា ឆ្នាំ២០២៥ វេលាម៉ោង ៥:០០ ល្ងាច ស្ថិតនៅ",
+  mapHref = "",
   galleryImages = GALLERY_IMAGES,
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +52,7 @@ export default function DescriptionSection({
         {/* Invite Heading */}
         <h2
           id="invite-title"
-          className="moul-regular text-[var(--primary)] text-sm sm:text-lg md:text-base lg:text-base xl:text-sm tracking-wide text-center text-balance"
+          className="font-khangtapenh text-[var(--primary)] text-lg tracking-wide text-center text-balance"
         >
           មានកិត្តិយសសូមគោរពអញ្ជើញ
         </h2>
@@ -71,19 +71,19 @@ export default function DescriptionSection({
           </h3>
           <dl className="mx-auto max-w-screen-md grid grid-cols-2 gap-4 sm:gap-6">
             <div className="flex flex-col items-center gap-3">
-              <dt className="moulpali-regular tracking-wide text-xs sm:text-sm md:text-base lg:text-sm xl:text-sm text-[var(--secondary)]">
+              <dt className="font-khangtapenh tracking-wide text-lg text-[var(--secondary)]">
                 កូនប្រុសនាម
               </dt>
               <dd className="moul-regular text-base sm:text-lg md:text-base lg:text-base xl:text-base text-[var(--primary)]">
-                សាវី ផានិត
+                ស៊ឹម ហុងគីម
               </dd>
             </div>
             <div className="flex flex-col items-center gap-3">
-              <dt className="moulpali-regular tracking-wide text-xs sm:text-sm md:text-base lg:text-sm xl:text-sm text-[var(--secondary)]">
+              <dt className="font-khangtapenh tracking-wide text-lg text-[var(--secondary)]">
                 កូនស្រីនាម
               </dt>
               <dd className="moul-regular text-base sm:text-lg md:text-base lg:text-base xl:text-base text-[var(--primary)]">
-                ឆាយ ថាមនី
+                តាំង ណារី
               </dd>
             </div>
           </dl>
@@ -104,13 +104,11 @@ export default function DescriptionSection({
 
             {/* date (slightly larger, wrapped in <time>) */}
             <p
-              className="moul-regular text-pretty text-center
-                        text-sm leading-7
-                        sm:text-lg sm:leading-8 lg:text-base xl:px-2 xl:text-sm
+              className="font-khangtapenh text-pretty text-center
+                        text-base leading-7
                         text-[var(--secondary)]"
             >
-              <time dateTime={eventDateIso} className="whitespace-nowrap">{khmerDateText}</time>
-              <br />
+              <time dateTime={eventDateIso}>{khmerDateText}</time>
               <span dangerouslySetInnerHTML={{ __html: khmerBoranDateText }} />
             </p>
 

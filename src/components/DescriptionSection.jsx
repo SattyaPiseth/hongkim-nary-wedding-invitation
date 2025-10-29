@@ -62,11 +62,14 @@ export default function DescriptionSection({
         </h2>
 
         {/* Intro copy */}
-        <p className="moulpali-regular text-[0.65rem] sm:text-xs md:text-sm lg:text-sm xl:text-xs tracking-wide leading-6 sm:leading-6 md:leading-7 max-w-[65ch] mx-auto text-[var(--text)]/90 text-pretty">
-          ឯកឧត្តម លោកឧកញ៉ា​ លោកជំទាវ {<br/>}លោក លោកស្រី អ្នកនាង កញ្ញា និងប្រិយមិត្តអញ្ជើញចូល រួមជាអធិបតីនិងជាភ្ញៀវកិត្តិយសដើម្បី ប្រសិទ្ធិពរជ័យសិរីសួស្តីជ័យមង្គលក្នុង ពិធីរៀបអាពាហ៍ពិពាហ៍
+        <p className="bokor-regular text-sm tracking-wide leading-6 sm:leading-6 md:leading-7 max-w-[65ch] mx-auto text-[var(--text)]/90 text-pretty">
+          សម្ដេច ទ្រង់ ឯកឧត្ដម លោកឧកញ៉ា លោកជំទាវ <br/> លោក​ លោកស្រី អ្នកនាង កញ្ញា និង
+          ប្រិយមិត្ត អញ្ជើញចូលរួម<br/>ជាអធិបតី និង​ ជាភ្ញៀវកិត្តិយស
+          ដើម្បីប្រសិទ្ធពរជ័យ សិរិសួស្ដី ជ័យមង្គល ក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍
+         <br/> កូនប្រុស‍‍‌-ស្រី របស់យើងខ្ញុំ។
         </p>
-        <p className="moulpali-regular text-[0.65rem] sm:text-xs md:text-sm lg:text-sm xl:text-xs tracking-wide leading-[3.5vh] text-[var(--text)]/90 text-pretty -mt-[2.5vh]">
-        កូនប្រុស កូនស្រី របស់យើងខ្ញុំ។</p>
+        {/* <p className="bokor-regular text-sm tracking-wide leading-[3.5vh] text-[var(--text)]/90 text-pretty -mt-[2.5vh]">
+        កូនប្រុស កូនស្រី របស់យើងខ្ញុំ។</p> */}
 
         {/* Couple names */}
         <section aria-labelledby="couple-title" className="mt-3">
@@ -98,9 +101,9 @@ export default function DescriptionSection({
           <div className="mx-auto max-w-[32rem] px-3 sm:px-0 flex flex-col
                           gap-3 sm:gap-4 md:gap-5">
             {/* intro line */}
-            <p className="moulpali-regular text-pretty text-center
-                          text-xs leading-7 tracking-widest
-                          sm:text-base sm:leading-8 lg:text-xs xl:text-xs
+            <p className="bokor-regular text-pretty text-center
+                          text-sm leading-7 tracking-widest
+      
                           text-[var(--text)]/90">
               {/* {startTimeText} */}
             <span dangerouslySetInnerHTML={{__html: startTimeText}}/>
@@ -118,9 +121,8 @@ export default function DescriptionSection({
 
 
             {/* venue */}
-            <p className="moulpali-regular text-pretty  text-center
-                          text-xs leading-7 
-                          sm:text-base sm:leading-8 md:text-base lg:text-xs xl:text-xs
+            <p className="bokor-regular text-pretty  text-center
+                          text-sm leading-7 
                           text-[var(--text)]">
               {venueName}
             </p>

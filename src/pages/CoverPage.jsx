@@ -63,7 +63,7 @@ export default function CoverPage() {
             width={2016}
             height={1453} 
             className="
-            m-auto max-w-[50%] w-full mt-[8vh] mb-[3vh] 
+            m-auto max-w-[50%] w-full mt-[4vh] mb-[3vh] 
             min-[480px]:mt-[0vh]
             min-[480px]:mb-[1.5vh] 
             min-[768px]:max-w-[40%] min-[768px]:mt-[3vh] 

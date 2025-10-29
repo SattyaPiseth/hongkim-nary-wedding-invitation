@@ -10,7 +10,7 @@ export default function Heading({
   return (
     <header
       className={cn(
-        "flex items-center justify-center tracking-wide text-[var(--gold)]",
+        "flex items-center justify-center tracking-wide mt-[1rem]",
         "p-4",
         "pt-[calc(var(--safe-top)+var(--pad-top-dynamic)+var(--pad-top-extra))]",
         className

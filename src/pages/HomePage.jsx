@@ -33,6 +33,9 @@ export default function HomePage() {
         jsonLd={jsonLd}
       />
 
+      
+      <Heading/>
+
       <div
         className={`
           relative z-10 mx-auto flex flex-col items-center
@@ -71,7 +74,7 @@ export default function HomePage() {
           "--hero-lift-xs": "clamp(0.5rem, 3.25vw, 1.5rem)",
         }}
       >
-        <Heading />
+        {/* <Heading /> */}
 
         {/* Smooth overlap: smaller on phones, subtle on larger screens */}
         <div

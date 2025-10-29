@@ -46,7 +46,7 @@ export default function CoverPage() {
             <img
               className="
                 m-auto max-w-[250px] w-full h-auto translate-y-12 min-[480px]:translate-y-0 
-                min-[320px]:mt-[5vh] min-[320px]:max-w-[200px] 
+                min-[320px]:mt-[5vh] min-[320px]:max-w-[250px] 
                 min-[360px]:mt-[10vh] 
                 min-[375px]:mt-[10vh] min-[375px]:max-w-[250px] 
                 min-[384px]:mt-[11vh] 

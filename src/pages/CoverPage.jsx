@@ -40,7 +40,7 @@ export default function CoverPage() {
         bingBot={!indexable ? "noindex, nofollow, noarchive" : undefined}
       />
 
-      <header>
+      <header className="-mt-[1.5rem]">
         {!isStoryPlaying && (
           <>
             <img

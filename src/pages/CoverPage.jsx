@@ -1,6 +1,5 @@
 import { useLoaderData, useOutletContext } from "react-router-dom";
 import Seo19 from "../components/Seo19.jsx";
-import Heading from "../components/base/Heading.jsx";
 import CoverSection from "../components/base/CoverSection.jsx";
 
 export default function CoverPage() {

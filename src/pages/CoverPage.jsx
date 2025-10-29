@@ -2,6 +2,10 @@ import { useEffect } from "react";
 import { useLoaderData, useOutletContext } from "react-router-dom";
 import Seo19 from "../components/Seo19.jsx";
 import CoverSection from "../components/base/CoverSection.jsx";
+import Spinner from "../components/button/Spinner.jsx";
+
+// If you created a shared Spinner, use this import:
+// import Spinner from "../components/ui/Spinner.jsx";
 
 export default function CoverPage() {
   // 🔒 Lock scroll only while this route is mounted
@@ -26,10 +30,30 @@ export default function CoverPage() {
   const mode = outlet.mode ?? "background";
   const startStory = outlet.startStory ?? (() => {});
   const isStoryPlaying = mode === "story";
+  const bgPainted = outlet.bgPainted ?? false; // ⬅️ from App.jsx
 
   const data = useLoaderData() ?? {};
   const { indexable = true, seo = {}, customer = null } = data;
 
+  // Show a spinner while the background video hasn't painted yet
+  if (!bgPainted) {
+    return (
+      <>
+        <Seo19
+          {...seo}
+          noindex={!indexable}
+          noarchive={!indexable}
+          googleBot={!indexable ? "noindex, nofollow, noarchive" : undefined}
+          bingBot={!indexable ? "noindex, nofollow, noarchive" : undefined}
+        />
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-transparent">
+        <Spinner label="Preparing background…" size="lg" />
+        </div>
+      </>
+    );
+  }
+
+  // ✅ Ready: render the real page
   return (
     <>
       <Seo19

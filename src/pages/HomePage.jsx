@@ -13,7 +13,7 @@ export default function HomePage() {
   const jsonLd = useMemo(() => {
     const base = {
       "@context": "https://schema.org",
-      name: "Phaneth & Thamony Wedding",
+      name: "Hongkim & Nary Wedding",
       url: canonical,
     };
     return [

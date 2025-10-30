@@ -82,7 +82,7 @@ function render({
   <meta property="og:url" content="${ogUrl || canonical}" />
   <meta property="og:image" content="${image}" />
   <meta property="og:image:secure_url" content="${secureImage}" />
-  <meta property="og:site_name" content="Phaneth & Thamony Wedding" />
+  <meta property="og:site_name" content="Hongkim & Nary Wedding" />
   <meta property="og:locale" content="${locale}" />
   ${
     updatedTime
@@ -115,7 +115,7 @@ export default async function handler(req) {
       process.env.VITE_SITE_URL) ||
     `${url.protocol}//${url.host}`;
   const siteUrl = base.replace(/\/+$/, "");
-  const defaultImage = `${siteUrl}/images/seo/phaneth-thamony-logo.jpg`;
+  const defaultImage = `${siteUrl}/images/seo/hongkim-nary.webp`;
 
   const path = url.pathname.replace(/\/+$/, "") || "/";
   const slug = path.slice(1);
@@ -129,13 +129,13 @@ export default async function handler(req) {
     const site = {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: "Phaneth & Thamony Wedding",
+      name: "Hongkim & Nary Wedding",
       url: canonical,
     };
     const org = {
       "@context": "https://schema.org",
       "@type": "Organization",
-      name: "Phaneth & Thamony Wedding",
+      name: "Hongkim & Nary Wedding",
       url: canonical,
       logo: defaultImage,
     };
@@ -150,7 +150,7 @@ export default async function handler(req) {
           "@context": "https://schema.org",
           "@type": "Event",
           "@id": `${canonical}#wedding-event`,
-          name: "Phaneth & Thamony Wedding",
+          name: "Hongkim & Nary Wedding",
           startDate: eventDate,
           eventAttendanceMode:
             "https://schema.org/OfflineEventAttendanceMode",
@@ -167,13 +167,13 @@ export default async function handler(req) {
           image: [defaultImage],
           description:
             "Join us in celebrating love. Ceremony details, schedule, map, and RSVP.",
-          organizer: { "@type": "Organization", name: "Phaneth & Thamony" },
+          organizer: { "@type": "Organization", name: "Hongkim & Nary" },
         }
       : null;
 
     return new Response(
       render({
-        title: "Home • Phaneth & Thamony Wedding",
+        title: "Home • Hongkim & Nary Wedding",
         description:
           "Join us in celebrating love. Ceremony details, schedule, map, and RSVP.",
         canonical,
@@ -195,7 +195,7 @@ export default async function handler(req) {
     const imageV = withVersion(defaultImage);
     return new Response(
       render({
-        title: "Invitation • Phaneth & Thamony Wedding",
+        title: "Invitation • Hongkim & Nary Wedding",
         description: "Private invitation for the ceremony.",
         canonical,
         ogUrl, // versioned
@@ -217,7 +217,7 @@ export default async function handler(req) {
     const imageV = withVersion(defaultImage);
     return new Response(
       render({
-        title: "Phaneth & Thamony Wedding",
+        title: "Hongkim & Nary Wedding",
         description:
           "Join us in celebrating love. Ceremony details, schedule, map, and RSVP.",
         canonical,

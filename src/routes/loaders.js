@@ -19,11 +19,11 @@ export async function coverLoader({ params, request }) {
       customer: null,
       indexable: true,
       seo: {
-        title: "Phaneth & Thamony Wedding — Save the Date",
+        title: "Hongkim & Nary Wedding — Save the Date",
         description:
           "Join us in celebrating love. Ceremony details, schedule, map, and RSVP.",
         canonical: abs(origin, "/"),
-        image: "/images/seo/phaneth-thamony-logo.jpg",
+        image: "/images/seo/hongkim-nary.webp",
         locale: "en_US",
         ogType: "website",
         updatedTime: new Date().toISOString(),
@@ -41,7 +41,7 @@ export async function coverLoader({ params, request }) {
         title: "Invitation not found",
         description: "This invite link is invalid or has expired.",
         canonical: abs(origin, "/"), // <- canonical to public page
-        image: "/images/seo/phaneth-thamony-logo.jpg",
+        image: "/images/seo/hongkim-nary.webp",
         locale: "en_US",
         ogType: "website",
         updatedTime: new Date().toISOString(),
@@ -61,7 +61,7 @@ export async function coverLoader({ params, request }) {
         title: "Invitation not found",
         description: "This invite link is invalid or has expired.",
         canonical: abs(origin, "/"), // <- canonical to public page
-        image: "/images/seo/phaneth-thamony-logo.jpg",
+        image: "/images/seo/hongkim-nary.webp",
         locale: "en_US",
         ogType: "website",
         updatedTime: new Date().toISOString(),
@@ -78,7 +78,7 @@ export async function coverLoader({ params, request }) {
       title: "Invitation",
       description: "Private invitation for the ceremony.",
       canonical: abs(origin, "/"), // <- canonical to public page
-      image: customer?.coverImageUrl ?? "/images/seo/phaneth-thamony-logo.jpg",
+      image: customer?.coverImageUrl ?? "/images/seo/hongkim-nary.webp",
       locale: customer?.locale ?? "km_KH",
       ogType: "website",
       updatedTime: new Date().toISOString(),

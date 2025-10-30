@@ -56,7 +56,7 @@ export default function DescriptionSection({
         {/* Invite Heading */}
         <h2
           id="invite-title"
-          className="font-khangtapenh text-[var(--primary)] text-lg tracking-wide text-center text-balance"
+          className="font-khangtapenh text-(--primary) text-lg tracking-wide text-center text-balance"
         >
           មានកិត្តិយសសូមគោរពអញ្ជើញ
         </h2>
@@ -76,9 +76,9 @@ export default function DescriptionSection({
           <h3 id="couple-title" className="sr-only">
             ឈ្មោះកូនប្រុស និងកូនស្រី
           </h3>
-          <dl className="mx-auto max-w-screen-md grid grid-cols-2 gap-4 sm:gap-6">
+          <dl className="mx-auto max-w-3xl grid grid-cols-2 gap-4 sm:gap-6">
             <div className="flex flex-col items-center gap-3">
-              <dt className="font-khangtapenh tracking-wide text-lg text-[var(--secondary)]">
+              <dt className="font-khangtapenh tracking-wide text-lg text-(--secondary)">
                 កូនប្រុសនាម
               </dt>
               <dd className="moul-regular text-base sm:text-lg md:text-base lg:text-base xl:text-base text-[var(--primary)]">
@@ -98,13 +98,13 @@ export default function DescriptionSection({
 
         {/* Event meta */}
         <section className="mt-4">
-          <div className="mx-auto max-w-[32rem] px-3 sm:px-0 flex flex-col
+          <div className="mx-auto max-w-lg px-3 sm:px-0 flex flex-col
                           gap-3 sm:gap-4 md:gap-5">
             {/* intro line */}
             <p className="bokor-regular text-pretty text-center
                           text-sm leading-7 tracking-widest
       
-                          text-[var(--text)]/90">
+                          text-(--text)/90">
               {/* {startTimeText} */}
             <span dangerouslySetInnerHTML={{__html: startTimeText}}/>
             </p>
@@ -113,7 +113,7 @@ export default function DescriptionSection({
             <p
               className="font-khangtapenh text-pretty text-center
                         text-base leading-7
-                        text-[var(--secondary)]"
+                        text-(--secondary)"
             >
               <time dateTime={eventDateIso}>{khmerDateText}</time>
               <span dangerouslySetInnerHTML={{ __html: khmerBoranDateText }} />
@@ -123,14 +123,14 @@ export default function DescriptionSection({
             {/* venue */}
             <p className="bokor-regular text-pretty  text-center
                           text-sm leading-7 
-                          text-[var(--text)]">
+                          text-(--text)">
               {venueName}
             </p>
 
             {/* Divider (slightly wider than before but still modest) */}
             <div className="flex justify-center mt-[1vh]" data-aos="fade-up">
               <img
-                className="w-[clamp(10rem,40vw,15rem)] max-w-screen-md"
+                className="w-[clamp(10rem,40vw,15rem)] max-w-3xl"
                 src="/images/border-styles/divider.avif"
                 alt="Divider Image"
                 loading="lazy"
@@ -140,7 +140,7 @@ export default function DescriptionSection({
             </div>
 
             {/* Bigger English gratitude image */}
-            <div className="mx-auto my-[2vh] max-w-screen-md flex justify-center" data-aos="fade-up">
+            <div className="mx-auto my-[2vh] max-w-3xl flex justify-center" data-aos="fade-up">
               <img
                 src="/images/home-page/gratitude/gratitude-english.webp"
                 alt="Gratitude in English"
@@ -155,7 +155,7 @@ export default function DescriptionSection({
             {/* Countdown */}
             <section className="mt-6 flex flex-col items-center justify-center gap-3 text-3xl text-[var(--primary)] " data-aos="fade-up">
               <h3 className="great-vibes-regular tracking-wide">Save The Date</h3>
-              <p className="great-vibes-regular text-xl tracking-wider">Phaneth&amp;Thamony Wedding</p>
+              <p className="great-vibes-regular text-xl tracking-wider">Hongkim & Nary Weddingg</p>
               <Countdown target={eventDateIso} ariaLabel={countdownLabel} />
             </section>
 
@@ -163,7 +163,7 @@ export default function DescriptionSection({
               {/* Full-bleed image inside SoftCard */}
               <div className="-mx-2 sm:-mx-7 md:-mx-8 my-[5vh] overflow-hidden rounded-lg" data-aos="fade-up"
      data-aos-anchor-placement="top-center">
-                <div className="relative w-full aspect-[3/4]">
+                <div className="relative w-full aspect-3/4">
                   <img
                     src="/images/home-page/gallary/portrait-03-compress.jpg"
                     alt="image"
@@ -267,7 +267,7 @@ export default function DescriptionSection({
 
 
         {/* Gallery */}
-        <h3 className="moul-regular text-base mt-6 text-[var(--primary)]" data-aos="fade-down">កម្រងរូបភាព</h3>
+        <h3 className="font-khangtapenh text-xl mt-6 text-(--primary)" data-aos="fade-down">កម្រងរូបភាព</h3>
         <MasonryGallery images={galleryImages} onOpen={open} />
 
         {isOpen && (

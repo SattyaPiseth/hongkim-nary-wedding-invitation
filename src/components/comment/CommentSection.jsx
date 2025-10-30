@@ -26,7 +26,7 @@ function Field({ id, label, className = "", size = "md", ...props }) {
     <div>
       <label
         htmlFor={id}
-        className="block mb-2 text-xs font-medium text-[var(--secondary)] moulpali-regular text-left"
+        className="block mb-2 text-base font-medium text-(--secondary) font-khangtapenh text-left"
       >
         {label}
       </label>
@@ -53,7 +53,7 @@ function Textarea({
     <div>
       <label
         htmlFor={id}
-        className="block mb-2 text-xs font-medium text-[var(--secondary)]  moulpali-regular text-left"
+        className="block mb-2 text-base font-medium text-(--secondary) font-khangtapenh text-left"
       >
         {label}
       </label>
@@ -71,7 +71,7 @@ function Textarea({
       />
       <div
         id={hintId}
-        className="mt-2 flex items-center justify-between text-[0.5rem] leading-5 tracking-wide text-pretty text-[var(--secondary)] moulpali-regular"
+        className="mt-2 flex items-center justify-between text-[0.65rem] leading-5 tracking-wide text-pretty text-(--secondary) bokor-regular"
       >
         <span>{hint}</span>
         <span aria-live="polite" className={warn ? "font-semibold" : ""}>
@@ -141,19 +141,19 @@ export function CommentSection({
 
   return (
     <section className="relative py-10 sm:py-16">
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-white/5 to-transparent " />
+      <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-transparent via-white/5 to-transparent " />
 
       <div className="relative mx-auto max-w-screen-sm">
         <div className={panel}>
           <div className="pointer-events-none absolute inset-0  ring-1 ring-white/30 " />
-          <div className="pointer-events-none absolute -inset-1 rounded-[28px] bg-gradient-to-tr from-white/30 via-white/0 to-white/20 blur-2xl opacity-30" />
+          <div className="pointer-events-none absolute -inset-1 rounded-[28px] bg-linear-to-tr from-white/30 via-white/0 to-white/20 blur-2xl opacity-30" />
 
           <div className="relative p-6 sm:p-8">
-            <h2 className="text-center font-extrabold tracking-tight moul-regular text-base sm:text-lg leading-tight text-[var(--primary)]">
+            <h2 className="text-center tracking-wider font-khangtapenh text-xl leading-tight text-(--primary)">
               {title}
             </h2>
 
-            <p className="mt-3 text-center text-[0.65rem] sm:text-sm lg:text-xs xl:text-xs lg:leading-[3.5vh]  moulpali-regular text-pretty leading-relaxed tracking-wide text-[var(--text)]">
+            <p className="mt-3 text-center text-[0.65rem] sm:text-sm lg:text-xs xl:text-xs lg:leading-[3.5vh] bokor-regular text-pretty leading-relaxed tracking-wide text-[var(--text)]">
               សូមបញ្ចូលឈ្មោះ និង ផ្ញើសារជូនពរ ដើម្បីប្រសិទ្ធពរជ័យ ដល់គូស្វាមី ភរិយាថ្មី
             </p>
 
@@ -175,7 +175,7 @@ export function CommentSection({
                 type="text"
                 name="name"
                 placeholder="សូមបញ្ចូលឈ្មោះរបស់អ្នក"
-                className="moulpali-regular text-xs text-pretty rounded-md"
+                className="siemreap-regular text-xs tracking-widest text-pretty rounded-md"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -192,8 +192,8 @@ export function CommentSection({
                 label="សារជូនពរ"
                 name="message"
                 placeholder="សូមបញ្ចូលសារជូនពរ. . . . . "
-                className="moulpali-regular text-xs text-pretty rounded-md"
-                hint="💡 ព័ត៌មានរបស់អ្នកអាចត្រូវបានបង្ហាញលើទំព័រខាងក្រោម (បើអ្នកយល់ព្រម)"
+                className="siemreap-regular tracking-widest text-xs text-pretty rounded-md"
+                hint="💡 ព័ត៌មានរបស់អ្នកអាចត្រូវបានបង្ហាញនៅទំព័រខាងក្រោម។"
                 hintId={hintId}
                 maxLength={maxLength}
                 value={message}
@@ -221,9 +221,9 @@ export function CommentSection({
                   className={[
                     "inline-flex items-center justify-center rounded-lg px-5 py-3",
                     "text-xs font-medium text-white",
-                    "bg-[var(--primary)]/85  hover:bg-[var(--secondary)] ",
+                    "bg-(--primary)/85  hover:bg-(--secondary) ",
                     "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40",
-                    "active:scale-[0.99] transition shadow-md shadow-black/20 backdrop-blur moulpali-regular",
+                    "active:scale-[0.99] transition shadow-md shadow-black/20 backdrop-blur bokor-regular tracking-widest",
                     isDisabled ? "opacity-60 cursor-not-allowed" : "",
                   ].join(" ")}
                 >

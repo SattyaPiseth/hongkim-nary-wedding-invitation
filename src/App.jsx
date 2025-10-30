@@ -7,7 +7,7 @@ const Overlay = lazy(() => import("./components/base/Overlay.jsx"));
 const PlayMusic = lazy(() => import("./components/PlayMusic.jsx"));
 
 const STORY_VIDEOS = ["/videos/home.webm"];
-const BGMUSIC = "/audio/special-someone-audio.mp3";
+const BGMUSIC = "/audio/beautiful-in-white.mp3";
 
 const DEFAULT_BG = {
   src: "/videos/background.webm",

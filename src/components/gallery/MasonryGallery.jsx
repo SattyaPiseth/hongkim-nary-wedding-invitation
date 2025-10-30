@@ -10,7 +10,7 @@ export function MasonryGallery({ images, onOpen }) {
         <div
           key={img.src || i} // ✅ key moved here
           data-aos="fade-up"
-          data-aos-anchor-placement="top-center"
+          data-aos-anchor-placement="center-center"
         >
           <MasonryImage
             data={img}

@@ -191,7 +191,7 @@ export function CommentSection({
                 id={msgId}
                 label="សារជូនពរ"
                 name="message"
-                placeholder="សូមបញ្ចូលសារជូនពរ. . . . . "
+                placeholder="សូមបញ្ចូលសារជូនពរ "
                 className="siemreap-regular tracking-widest text-xs text-pretty rounded-md"
                 hint="💡 ព័ត៌មានរបស់អ្នកអាចត្រូវបានបង្ហាញនៅទំព័រខាងក្រោម។"
                 hintId={hintId}

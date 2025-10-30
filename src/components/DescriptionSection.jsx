@@ -19,7 +19,7 @@ export default function DescriptionSection({
   startTimeText = "និងពិសាភោជនីយអាហារដែលនឹង <br/> ប្រព្រឹត្តទៅនៅ",
   khmerDateText = "ថ្ងៃ អាទិត្យ ១០ កើត ខែមិគសិរ ឆ្នាំម្សាញ់ សប្តស័ក ព.ស ២៥៦៩ ",
   khmerBoranDateText = "ត្រូវនឹងថ្ងៃទី ៣០ ខែវិច្ឆិកា ឆ្នាំ២០២៥ វេលាម៉ោង ៥:០០ ល្ងាច ស្ថិតនៅ",
-  mapHref = "",
+  mapHref = "https://maps.app.goo.gl/mJzzo7rHZ7SUfs4t6",
   galleryImages = GALLERY_IMAGES,
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -211,7 +211,7 @@ export default function DescriptionSection({
               withRipple={true}
               className="bg-transparent shadow-none"
               onStart={() =>
-                window.open("https://maps.app.goo.gl/81yYewLn4oUyYuy58", "_self")
+                window.open(mapHref, "_self")
               }
             />
 
@@ -267,7 +267,7 @@ export default function DescriptionSection({
 
 
         {/* Gallery */}
-        <h3 className="font-khangtapenh text-xl mt-6 text-(--primary)" data-aos="fade-down">កម្រងរូបភាព</h3>
+        <h3 className="font-khangtapenh text-xl mt-6 text-(--primary)" data-aos="fade-up">កម្រងរូបភាព</h3>
         <MasonryGallery images={galleryImages} onOpen={open} />
 
         {isOpen && (

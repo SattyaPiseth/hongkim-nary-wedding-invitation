@@ -36,7 +36,7 @@ export default function Countdown({ target, ariaLabel }) {
 
   return (
     <div
-      className="grid grid-flow-col auto-cols-max gap-5 text-center"
+      className="grid grid-flow-col auto-cols-max gap-5 text-center font-merriweather"
       role="timer"
       aria-live="polite"
       aria-label={ariaLabel}

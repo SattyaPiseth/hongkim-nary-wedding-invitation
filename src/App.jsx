@@ -6,18 +6,39 @@ import VideoLayer from "./components/video/VideoLayer.jsx";
 const Overlay = lazy(() => import("./components/base/Overlay.jsx"));
 const PlayMusic = lazy(() => import("./components/PlayMusic.jsx"));
 
-const STORY_VIDEOS = ["/videos/home.webm"];
+const toVideoSources = (webmPath, mp4Path) => [
+  { src: webmPath, type: "video/webm" },
+  ...(mp4Path ? [{ src: mp4Path, type: "video/mp4" }] : []),
+];
+
+const STORY_VIDEOS = [
+  {
+    src: "/videos/home.webm",
+    sources: toVideoSources("/videos/home.webm", "/videos/home.mp4"),
+  },
+];
 const BGMUSIC = "/audio/beautiful-in-white.mp3";
 
 const DEFAULT_BG = {
   src: "/videos/background.webm",
+  sources: toVideoSources("/videos/background.webm", "/videos/background.mp4"),
   poster: "/images/cover-page/background.webp",
   loop: true,
 };
 
 const BG_BY_ROUTE = {
-  "/": { src: "/videos/background.webm", poster: "/images/cover-page/background.webp", loop: true },
-  "/home": { src: "/videos/background.webm", poster: "/images/cover-page/background.webp", loop: true },
+  "/": {
+    src: "/videos/background.webm",
+    sources: toVideoSources("/videos/background.webm", "/videos/background.mp4"),
+    poster: "/images/cover-page/background.webp",
+    loop: true,
+  },
+  "/home": {
+    src: "/videos/background.webm",
+    sources: toVideoSources("/videos/background.webm", "/videos/background.mp4"),
+    poster: "/images/cover-page/background.webp",
+    loop: true,
+  },
 };
 
 const isUuidPath = (p) => {
@@ -30,8 +51,13 @@ const isUuidPath = (p) => {
 const pickRouteBg = (pathname) => {
   if (BG_BY_ROUTE[pathname]) return BG_BY_ROUTE[pathname];
   if (isUuidPath(pathname)) {
-    return { src: "/videos/background.webm", poster: "/images/cover-page/background.webp", loop: true };
-    }
+    return {
+      src: "/videos/background.webm",
+      sources: toVideoSources("/videos/background.webm", "/videos/background.mp4"),
+      poster: "/images/cover-page/background.webp",
+      loop: true,
+    };
+  }
   return DEFAULT_BG;
 };
 
@@ -182,7 +208,38 @@ export default function App() {
     if (!videoRef.current) return;
     const a = audioRef.current;
 
-    const applyAndPlay = async (src, { loop }) => {
+    const normalizeSourceSet = (descriptor) => {
+      if (!descriptor) return [];
+      if (Array.isArray(descriptor)) return descriptor;
+      if (typeof descriptor === "string") return [descriptor];
+      if (Array.isArray(descriptor.sources)) return descriptor.sources;
+      if (descriptor.src) return [descriptor.src];
+      return [];
+    };
+
+    const toSourceObject = (entry) => {
+      if (!entry) return null;
+      if (typeof entry === "string") return { src: entry };
+      if (entry.src) return entry;
+      return null;
+    };
+
+    const pickPlayableSource = (el, descriptor) => {
+      const candidates = normalizeSourceSet(descriptor).map(toSourceObject).filter(Boolean);
+      if (!candidates.length) return null;
+      if (!el?.canPlayType) return candidates[0];
+
+      for (const candidate of candidates) {
+        if (!candidate.src) continue;
+        if (!candidate.type) return candidate;
+        const support = el.canPlayType(candidate.type);
+        if (support === "probably" || support === "maybe") return candidate;
+      }
+
+      return candidates.find((candidate) => candidate.src) ?? null;
+    };
+
+    const applyAndPlay = async (descriptor, { loop }) => {
       const el = videoRef.current;
       if (!el) return;
 
@@ -192,17 +249,20 @@ export default function App() {
       el.setAttribute("playsinline", "");
       el.srcObject = null;
 
-      const absolute = new URL(src, window.location.origin).href;
+      const chosen = pickPlayableSource(el, descriptor);
+      if (!chosen?.src) return;
+
+      const absolute = new URL(chosen.src, window.location.origin).href;
       const same = el.currentSrc === absolute || el.src === absolute;
 
-      // 🆕 Reset only when the src actually changes
+      // Reset only when the src actually changes
       if (!same && lastAppliedSrcRef.current !== absolute) {
         setBgPainted(false);                // <- reset here
         lastAppliedSrcRef.current = absolute;
       }
 
       if (!same) {
-        el.src = src;
+        el.src = chosen.src;
         await new Promise((res) => {
           const on = () => (el.removeEventListener("loadedmetadata", on), res());
           el.addEventListener("loadedmetadata", on, { once: true });
@@ -220,11 +280,11 @@ export default function App() {
     };
 
     if (mode === "story") {
-      const src = STORY_VIDEOS[storyIndex] ?? STORY_VIDEOS[0];
-      applyAndPlay(src, { loop: false });
+      const videoDescriptor = STORY_VIDEOS[storyIndex] ?? STORY_VIDEOS[0];
+      applyAndPlay(videoDescriptor, { loop: false });
       ensureAudioPlaying();
     } else if (bgSrcReady) {
-      applyAndPlay(effectiveBg.src, { loop: effectiveBg.loop });
+      applyAndPlay(effectiveBg, { loop: effectiveBg.loop });
       ensureAudioPlaying();
     }
   }, [mode, storyIndex, unlocked, muted, effectiveBg, fadeTo, allowAudio, bgSrcReady]);

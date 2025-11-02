@@ -172,7 +172,7 @@ export default function Discussion() {
   const countText = comments.length === 1 ? "1 wish" : `${comments.length} wishes`;
 
   return (
-    <section className="bg-transparent py-8 lg:py-16 antialiased" data-aos="fade-up">
+    <section className="bg-transparent py-8 lg:py-16 antialiased">
       <div className="max-w-2xl mx-auto">
         <CommentSection onSubmit={handleSubmit} />
 
@@ -182,7 +182,7 @@ export default function Discussion() {
           </p>
         )}
 
-        <div className="mt-8" data-aos="zoom-out">
+        <div className="mt-8">
           <div className="relative rounded-2xl border border-white/30 bg-white/40 shadow-xl backdrop-blur-xl ring-1 ring-black/5">
             {/* Sticky header */}
             <div className="sticky top-0 z-10 flex items-center justify-between gap-3 px-5 py-3 rounded-t-2xl bg-gradient-to-b from-white/70 to-white/30 border-b border-white/40 backdrop-blur-xl">

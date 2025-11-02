@@ -5,10 +5,18 @@ import React, {
   useLayoutEffect,
   useState,
   useCallback,
+  useMemo,
 } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeftIcon, ChevronRightIcon, XIcon } from "./Icons.jsx";
 import { AnimatePresence, motion } from "framer-motion";
+import { computeMasonryOrder } from "../../utils/galleryLayout.js";
+
+function wrapIndex(value, length) {
+  if (!length) return 0;
+  const result = value % length;
+  return result < 0 ? result + length : result;
+}
 
 /** Lock scroll on open with scrollbar compensation */
 function useScrollLock(locked) {
@@ -48,12 +56,24 @@ export const Lightbox = ({
   onClose,
   onPrev,
   onNext,
+  onSelect,
+  displayOrder,
 }) => {
-  const count = images.length;
+  const normalizedImages = Array.isArray(images) ? images : [];
+  const count = normalizedImages.length;
   if (!count) return null;
 
   // Current target source/alt for this index
-  const incoming = useImageSrc(images, index);
+  const incoming = useImageSrc(normalizedImages, index);
+  const effectiveOrder = useMemo(() => {
+    if (Array.isArray(displayOrder) && displayOrder.length) {
+      return displayOrder;
+    }
+    return computeMasonryOrder(normalizedImages);
+  }, [displayOrder, normalizedImages]);
+  const displayPosition = effectiveOrder.indexOf(index);
+  const logicalIndex = displayPosition >= 0 ? displayPosition + 1 : index + 1;
+  const logicalTotal = effectiveOrder.length || count;
 
   // The image actually displayed (only updated after decode())
   const [shownSrc, setShownSrc] = useState(incoming.src);
@@ -127,20 +147,53 @@ export const Lightbox = ({
   const [busy, setBusy] = useState(false);
   const transitionMs = 280; // keep in sync with transition below
 
-  const safePrev = () => {
-    if (busy || isLoading) return;
-    setBusy(true);
-    dirRef.current = -1;
-    onPrev?.();
-    setTimeout(() => setBusy(false), transitionMs);
-  };
-  const safeNext = () => {
-    if (busy || isLoading) return;
-    setBusy(true);
-    dirRef.current = 1;
-    onNext?.();
-    setTimeout(() => setBusy(false), transitionMs);
-  };
+  const orderLength = effectiveOrder.length;
+
+  const navigateBy = useCallback(
+    (direction) => {
+      if (count <= 1) return;
+
+      if (orderLength > 0 && onSelect) {
+        const pos = effectiveOrder.indexOf(index);
+        if (pos !== -1) {
+          const nextPos = wrapIndex(pos + direction, orderLength);
+          const target = effectiveOrder[nextPos];
+          if (typeof target === "number") {
+            onSelect(target);
+            return;
+          }
+        }
+      }
+
+      if (onSelect) {
+        const target = wrapIndex(index + direction, count);
+        onSelect(target);
+        return;
+      }
+
+      if (direction < 0) {
+        onPrev?.();
+      } else {
+        onNext?.();
+      }
+    },
+    [count, effectiveOrder, index, onNext, onPrev, onSelect, orderLength],
+  );
+
+  const handleNavigate = useCallback(
+    (direction) => {
+      if (busy || isLoading || count <= 1) return;
+      const step = direction < 0 ? -1 : 1;
+      setBusy(true);
+      dirRef.current = step;
+      navigateBy(step);
+      setTimeout(() => setBusy(false), transitionMs);
+    },
+    [busy, isLoading, count, navigateBy],
+  );
+
+  const safePrev = useCallback(() => handleNavigate(-1), [handleNavigate]);
+  const safeNext = useCallback(() => handleNavigate(1), [handleNavigate]);
 
   // Lock background scroll while open
   useScrollLock(true);
@@ -176,7 +229,7 @@ export const Lightbox = ({
     if (!count) return;
     const nextIdx = (index + 1) % count;
     const getSrc = (item) => (typeof item === "string" ? item : item?.src);
-    const nextUrl = getSrc(images[nextIdx]);
+    const nextUrl = getSrc(normalizedImages[nextIdx]);
     if (!nextUrl) return;
 
     const rIC = window.requestIdleCallback || ((cb) => setTimeout(cb, 120));
@@ -188,7 +241,7 @@ export const Lightbox = ({
       img.src = nextUrl;
     });
     return () => cancelRIC(id);
-  }, [index, images, count]);
+  }, [index, normalizedImages, count]);
 
 
 
@@ -210,7 +263,7 @@ export const Lightbox = ({
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose, isLoading, busy]);
+  }, [onClose, isLoading, busy, safeNext, safePrev]);
 
   // Simple focus trap
   useEffect(() => {
@@ -251,7 +304,7 @@ export const Lightbox = ({
     enter: (d) => ({
       x: d * 40, // from right if next, from left if prev
       opacity: 0.0,
-      scale: 0.995, // tiny scale helps reduce “pop”
+      scale: 0.995, // tiny scale helps reduce 'pop'
     }),
     center: {
       x: 0,
@@ -265,7 +318,7 @@ export const Lightbox = ({
     }),
   };
 
-  // Transition tuned for “buttery”
+  // Transition tuned for 'buttery'
   const transition = reduceMotion
     ? { duration: 0 }
     : { duration: 0.28, ease: [0.22, 0.61, 0.36, 1] };
@@ -433,9 +486,9 @@ export const Lightbox = ({
                 : "text-xs sm:text-sm md:text-base px-3 py-2 sm:px-4 sm:py-2.5",
             ].join(" ")}
           >
-            Image {index + 1}{" "}
+            Image {logicalIndex}{" "}
             <span className="opacity-70">
-              • {index + 1}/{count}
+              {"\u2022"} {logicalIndex}/{logicalTotal}
             </span>
           </figcaption>
         </figure>

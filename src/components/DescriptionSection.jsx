@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import SoftCard from "./SoftCard";
 import Countdown from "./Countdown";
 import { MasonryGallery } from "./gallery/MasonryGallery";
@@ -11,6 +11,7 @@ import PromoteSection from "./PromoteSection";
 import Discussion from "./comment/Discussion";
 import AnimatedActionButton from "./button/AnimatedActionButton";
 import Spinner from "./button/Spinner";
+import { computeMasonryOrder } from "../utils/galleryLayout.js";
 
 export default function DescriptionSection({
   // Customizable props with safe defaults
@@ -27,12 +28,34 @@ export default function DescriptionSection({
   const [loaded, setLoaded] = useState(false);
   const [loadError, setLoadError] = useState(false);
 
+  const displayOrder = useMemo(
+    () => computeMasonryOrder(galleryImages),
+    [galleryImages],
+  );
+  const totalImages = Array.isArray(galleryImages) ? galleryImages.length : 0;
 
-  const totalImages = galleryImages.length;
+  const resolveByOffset = (currentIndex, offset) => {
+    if (totalImages <= 0) return currentIndex;
+    if (displayOrder.length > 0) {
+      const pos = displayOrder.indexOf(currentIndex);
+      if (pos !== -1) {
+        const nextPos =
+          (pos + offset + displayOrder.length) % displayOrder.length;
+        return displayOrder[nextPos];
+      }
+    }
+    return (currentIndex + offset + totalImages) % totalImages;
+  };
+
   const open = (i) => { setIdx(i); setIsOpen(true); };
   const close = () => setIsOpen(false);
-  const prev = () => setIdx((i) => (i - 1 + totalImages) % totalImages);
-  const next = () => setIdx((i) => (i + 1) % totalImages);
+  const prev = () => setIdx((i) => resolveByOffset(i, -1));
+  const next = () => setIdx((i) => resolveByOffset(i, 1));
+  const select = (target) => {
+    if (typeof target === "number" && target >= 0 && target < totalImages) {
+      setIdx(target);
+    }
+  };
 
   // Constants (no need for useMemo)
   const countdownLabel = "Wedding Countdown";
@@ -66,7 +89,7 @@ export default function DescriptionSection({
           សម្ដេច ទ្រង់ ឯកឧត្ដម លោកឧកញ៉ា លោកជំទាវ <br/> លោក​ លោកស្រី អ្នកនាង កញ្ញា និង
           ប្រិយមិត្ត អញ្ជើញចូលរួម<br/>ជាអធិបតី និង​ ជាភ្ញៀវកិត្តិយស
           ដើម្បីប្រសិទ្ធពរជ័យ សិរិសួស្ដី ជ័យមង្គល ក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍
-         <br/> កូនប្រុស‍‍‌-ស្រី របស់យើងខ្ញុំ។
+         <br/> កូនប្រុស-ស្រី របស់យើងខ្ញុំ។
         </p>
         {/* <p className="bokor-regular text-sm tracking-wide leading-[3.5vh] text-[var(--text)]/90 text-pretty -mt-[2.5vh]">
         កូនប្រុស កូនស្រី របស់យើងខ្ញុំ។</p> */}
@@ -128,7 +151,7 @@ export default function DescriptionSection({
             </p>
 
             {/* Divider (slightly wider than before but still modest) */}
-            <div className="flex justify-center mt-[1vh]" data-aos="fade-up">
+            <div className="flex justify-center mt-[1vh]">
               <img
                 className="w-[clamp(10rem,40vw,15rem)] max-w-3xl"
                 src="/images/border-styles/divider.avif"
@@ -153,7 +176,7 @@ export default function DescriptionSection({
             </div>
 
             {/* Countdown */}
-            <section className="mt-6 flex flex-col items-center justify-center gap-3 text-3xl text-[var(--primary)] " data-aos="fade-up">
+            <section className="mt-6 flex flex-col items-center justify-center gap-3 text-3xl text-(--primary) " data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
               <h3 className="font-playfair tracking-wide">Save The Date</h3>
               <p className="font-merriweather text-xl tracking-wider">Hongkim & Nary Wedding</p>
               <Countdown target={eventDateIso} ariaLabel={countdownLabel} />
@@ -275,8 +298,10 @@ export default function DescriptionSection({
             images={galleryImages}
             index={idx}
             onClose={close}
+            onSelect={select}
             onPrev={prev}
             onNext={next}
+            displayOrder={displayOrder}
           />
         )}
 

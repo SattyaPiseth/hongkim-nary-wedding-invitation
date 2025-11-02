@@ -40,12 +40,11 @@
 /* Optional: a fluid vertical rhythm for sections (used above on CoverPage) */
 :root {
   /* existing */  
-  --primary:   #590d22; /* deep wine */
+  --primary:   #6e142e; /* deep wine */
   --secondary: #8f3a55; /* muted roseberry */
   --accent:    #a4133c; /* soft petal pink */
   --background:#fdf6f7; /* very light blush background */
   --text:      #3a0e1a; /* gentle maroon text */
-
 
 
   --safe-top: env(safe-area-inset-top, 0px);

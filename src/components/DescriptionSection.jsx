@@ -227,7 +227,7 @@ export default function DescriptionSection({
             </a> */}
             <AnimatedActionButton
               variant="bare"        
-              src="/images/home-page/map/location-button-01.avif"
+              src="/images/home-page/map/location-button-01.png"
               ariaLabel="បើកផែនទី"
               imgClassName="relative block mx-auto w-[70%] object-contain"
               withShine={true}

@@ -79,7 +79,7 @@ export default function CoverSection({
         >
           <AnimatedActionButton
             onStart={onStart}
-            src="/images/border-styles/border-button.avif"
+            src="/images/border-styles/border-button.png"
             variant="bare"
             withShine
             withRipple

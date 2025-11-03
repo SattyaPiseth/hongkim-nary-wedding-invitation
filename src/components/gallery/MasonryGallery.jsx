@@ -22,7 +22,7 @@ export function MasonryGallery({ images, onOpen }) {
 
   return (
     <section
-      className="space-y-6"
+      className="space-y-2 sm:space-y-3"
       style={{ contain: "layout style paint", containIntrinsicSize: "1px 1000px" }}
     >
       {layout.rows.map((row) => {

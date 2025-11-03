@@ -28,7 +28,7 @@ export default function Heading({
   return (
     <header
       className={cn(
-        "flex items-center justify-center tracking-wide mt-[1rem]",
+        "flex items-center justify-center tracking-wide mt-5",
         "p-4",
         "pt-[calc(var(--safe-top)+var(--pad-top-dynamic)+var(--pad-top-extra))]",
         className

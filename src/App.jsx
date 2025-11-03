@@ -1,5 +1,7 @@
 import { Outlet, useLocation, useNavigate, useNavigation } from "react-router-dom";
 import { useRef, useState, useEffect, useCallback, lazy, Suspense } from "react";
+import "aos/dist/aos.css";
+import AOS from "aos";
 import Seo19 from "./components/Seo19.jsx";
 import VideoLayer from "./components/video/VideoLayer.jsx";
 
@@ -151,27 +153,23 @@ export default function App() {
     return () => {};
   }, []);
 
-  // AOS lazy init (✅ optional: import CSS via Vite)
+  // AOS init (CSS bundled so elements start hidden before animation)
   useEffect(() => {
-    const loadAOS = async () => {
-      try {
-        await import("aos/dist/aos.css");
-        const AOS = (await import("aos")).default;
-        AOS.init({ once: true, duration: 700, easing: "ease-out-cubic" });
-        aosRef.current = AOS;
-        aosReadyRef.current = true;
+    try {
+      AOS.init({ once: true, duration: 700, easing: "ease-out-cubic" });
+      aosRef.current = AOS;
+      aosReadyRef.current = true;
 
-        if (window.requestIdleCallback) {
-          requestIdleCallback(() => AOS.refreshHard(), { timeout: 1000 });
-        } else {
-          setTimeout(() => AOS.refreshHard(), 1000);
-        }
-      } catch (e) {
-        // Don’t block the app if AOS fails to load
-        console.error("AOS load failed:", e);
+      const scheduleRefresh = () => aosRef.current?.refresh();
+      if (window.requestIdleCallback) {
+        requestIdleCallback(scheduleRefresh, { timeout: 1000 });
+      } else {
+        setTimeout(scheduleRefresh, 1000);
       }
-    };
-    loadAOS();
+    } catch (e) {
+      // Don�t block the app if AOS fails to load
+      console.error("AOS load failed:", e);
+    }
   }, []);
 
 
@@ -434,3 +432,6 @@ export default function App() {
     </>
   );
 }
+
+
+

@@ -102,12 +102,12 @@ export default function CoverPage() {
                 [@media(min-width:1440px)_and_(max-height:900px)]:max-w-[22.5%]
                 [@media(min-width:1536px)_and_(max-height:864px)]:max-w-[20%]
               "
-              src="/images/cover-page/heading-cover-page-01.avif"
+              src="/images/cover-page/heading-cover-page.png"
               alt="heading"
             />
             <img
-              width={2016}
-              height={1453}
+              width={681}
+              height={383}
               className="
                 m-auto max-w-[50%] w-full mt-[4vh] mb-[3vh] 
                 min-[480px]:mt-[0vh]

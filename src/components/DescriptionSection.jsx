@@ -165,7 +165,7 @@ export default function DescriptionSection({
             {/* Bigger English gratitude image */}
             <div className="mx-auto my-[2vh] max-w-3xl flex justify-center" data-aos="fade-up">
               <img
-                src="/images/home-page/gratitude/gratitude-english.webp"
+                src="/images/home-page/gratitude/gratitude-english.png"
                 alt="Gratitude in English"
                 className="w-[clamp(20rem,90vw,50rem)] h-auto object-contain"
                 loading="lazy"

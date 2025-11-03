@@ -5,7 +5,8 @@ import { MasonryGallery } from "./gallery/MasonryGallery";
 import { Lightbox } from "./modal/Lightbox";
 
 import { GALLERY_IMAGES } from "../data/galleryImages";
-import morning_event_image from "/images/home-page/agenda/agenda-01.webp";
+import morning_event_image from "/images/home-page/agenda/agenda-01.png";
+import afternoon_event_image from "/images/home-page/agenda/agenda-02.png";
 import { GratitudeSection } from "./GratitudeSection";
 import PromoteSection from "./PromoteSection";
 import Discussion from "./comment/Discussion";
@@ -284,9 +285,9 @@ export default function DescriptionSection({
 
 
 
-        {/* <figure className="-mt-5 py-2 ">
+        <figure className="-mt-[4.5rem]">
           <img src={afternoon_event_image} alt="Afternoon event" loading="lazy" decoding="async" />
-        </figure> */}
+        </figure> 
 
 
         {/* Gallery */}

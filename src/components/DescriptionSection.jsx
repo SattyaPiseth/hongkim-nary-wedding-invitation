@@ -284,7 +284,6 @@ export default function DescriptionSection({
         </figure>
 
 
-
         <figure className="-mt-[5rem]">
           <img src={afternoon_event_image} alt="Afternoon event" loading="lazy" decoding="async" />
         </figure> 

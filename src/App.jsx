@@ -37,6 +37,7 @@ const BG_BY_ROUTE = {
     poster: "/images/cover-page/background.webp",
     loop: true,
   },
+  
   "/home": {
     src: "/videos/background.webm",
     sources: toVideoSources("/videos/background.webm", "/videos/background.mp4"),

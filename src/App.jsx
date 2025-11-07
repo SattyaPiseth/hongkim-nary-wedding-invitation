@@ -28,6 +28,8 @@ const DEFAULT_BG = {
   loop: true,
 };
 
+
+
 const BG_BY_ROUTE = {
   "/": {
     src: "/videos/background.webm",
@@ -167,7 +169,7 @@ export default function App() {
         setTimeout(scheduleRefresh, 1000);
       }
     } catch (e) {
-      // Don’t block the app if AOS fails to load
+      // Donï¿½t block the app if AOS fails to load
       console.error("AOS load failed:", e);
     }
   }, []);

@@ -13,10 +13,6 @@ export const GALLERY_IMAGES = [
   { src: "/images/home-page/gallary/portrait-11.jpg", width: 1200, height: 1600 },
   { src: "/images/home-page/gallary/portrait-12.jpg", width: 1200, height: 1600 },
   { src: "/images/home-page/gallary/portrait-13.jpg", width: 1200, height: 1600 },
-  { src: "/images/home-page/gallary/portrait-14.jpg", width: 1200, height: 1600 },
-  { src: "/images/home-page/gallary/portrait-15.jpg", width: 1200, height: 1600 },
-  { src: "/images/home-page/gallary/portrait-16.jpg", width: 1200, height: 1600 },
-  { src: "/images/home-page/gallary/portrait-17.jpg", width: 1200, height: 1600 },
 
   // Landscape images (1800x1200)
   { src: "/images/home-page/gallary/landscape-01.jpg", width: 1800, height: 1200 },
@@ -29,7 +25,4 @@ export const GALLERY_IMAGES = [
   { src: "/images/home-page/gallary/landscape-08.jpg", width: 1800, height: 1200 },
   { src: "/images/home-page/gallary/landscape-09.jpg", width: 1800, height: 1200 },
   { src: "/images/home-page/gallary/landscape-10.jpg", width: 1800, height: 1200 },
-  { src: "/images/home-page/gallary/landscape-11.jpg", width: 1800, height: 1200 },
-  { src: "/images/home-page/gallary/landscape-12.jpg", width: 1800, height: 1200 },
-  { src: "/images/home-page/gallary/landscape-13.jpg", width: 1800, height: 1200 },
 ];

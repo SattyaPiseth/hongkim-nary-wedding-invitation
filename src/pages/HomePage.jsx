@@ -1,10 +1,14 @@
 import { useMemo } from "react";
+import { useOutletContext } from "react-router-dom";
 import Seo19 from "../components/Seo19";
 import DescriptionSection from "../components/DescriptionSection";
 import ParentsSection from "../components/ParentsSection";
 import Heading from "../components/base/Heading";
+import DecorativeFooter from "../components/base/DecorativeFooter.jsx";
 
 export default function HomePage() {
+  const outlet = useOutletContext() ?? {};
+  const homeFooterSizing = outlet.coverFooterSizing;
   const raw = import.meta.env.VITE_SITE_URL || "http://localhost:5173";
   const siteUrl = raw.replace(/\/+$/, "");
   const canonical = `${siteUrl}/`;
@@ -113,6 +117,8 @@ export default function HomePage() {
           </p>
         </div> */}
       </div>
+
+      <DecorativeFooter active size={homeFooterSizing} />
     </>
   );
 }

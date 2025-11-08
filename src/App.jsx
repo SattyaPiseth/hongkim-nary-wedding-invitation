@@ -28,6 +28,13 @@ const DEFAULT_BG = {
   loop: true,
 };
 
+const COVER_PAGE_DECORATIVE_SIZE = {
+  minWidth: 220,
+  maxWidth: "min(100vw, 400px)",
+  height: undefined,
+  zIndex: 5,
+};
+
 
 
 const BG_BY_ROUTE = {
@@ -429,6 +436,7 @@ export default function App() {
             muted,
             setMuted,
             bgPainted, // 🆕 use this in routes to show a spinner until ready
+            coverFooterSizing: COVER_PAGE_DECORATIVE_SIZE,
           }}
         />
       </main>

@@ -283,8 +283,8 @@ export default function DescriptionSection({
           </div>
         </figure>
 
-        <figure className="-mt-[5rem] scale-110">
-          <img src={afternoon_event_image} alt="Afternoon event" loading="lazy" decoding="async" />
+        <figure className="-mt-[5rem]">
+          <img src={afternoon_event_image} className="scale-110" alt="Afternoon event" loading="lazy" decoding="async" />
         </figure> 
 
         {/* Gallery */}

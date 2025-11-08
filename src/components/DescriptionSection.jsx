@@ -283,11 +283,9 @@ export default function DescriptionSection({
           </div>
         </figure>
 
-
-        <figure className="-mt-[5rem]">
+        <figure className="-mt-[5rem] scale-110">
           <img src={afternoon_event_image} alt="Afternoon event" loading="lazy" decoding="async" />
         </figure> 
-
 
         {/* Gallery */}
         <h3 className="font-khangtapenh text-xl mt-6 text-(--primary)" data-aos="fade-up">កម្រងរូបភាព</h3>

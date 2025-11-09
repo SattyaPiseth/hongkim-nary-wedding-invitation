@@ -143,7 +143,7 @@ function HeroArt() {
     <header className="relative z-10 -mt-[1.5rem]">
       <img
         className={HERO_HEADING_CLASSNAMES}
-        src="/images/cover-page/heading-cover-page.png"
+        src="/images/cover-page/heading-cover-page.png?v=20251230v1"
         alt="heading"
       />
       <img

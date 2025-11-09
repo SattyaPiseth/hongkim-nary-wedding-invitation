@@ -1,8 +1,9 @@
-﻿import React from "react";
+import React from "react";
+import { withAssetVersion } from "../../utils/assetVersion.js";
 
 const cn = (...parts) => parts.filter(Boolean).join(" ");
 
-const DEFAULT_SRC = "/images/cover-page/heading-cover-page.png";
+const DEFAULT_SRC = withAssetVersion("/images/cover-page/heading-cover-page.png");
 const IMAGE_CLASSES = [
   "block mx-auto h-auto select-none",
   "aspect-[414/207]",
@@ -53,3 +54,4 @@ export default function Heading({
     </header>
   );
 }
+

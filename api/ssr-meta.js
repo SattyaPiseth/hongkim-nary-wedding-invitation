@@ -14,7 +14,9 @@ const esc = (s = "") =>
 const BUILD_ID =
   (typeof process !== "undefined" &&
     process.env &&
-    (process.env.VITE_BUILD_ID || process.env.BUILD_ID)) ||
+    (process.env.VITE_ASSET_VERSION ||
+      process.env.VITE_BUILD_ID ||
+      process.env.BUILD_ID)) ||
   new Date().toISOString().replace(/[-:TZ.]/g, "").slice(0, 12);
 
 function withVersion(u, v = BUILD_ID) {

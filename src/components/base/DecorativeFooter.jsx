@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { motion, useAnimationControls, useReducedMotion } from "framer-motion";
+import { withAssetVersion } from "../../utils/assetVersion.js";
 
 const cn = (...parts) => parts.filter(Boolean).join(" ");
 
@@ -75,7 +76,7 @@ function useBottomFlowerAnimation(active = true) {
 export default function DecorativeFooter({
   active = true,
   size,
-  src = "/images/cover-page/bottom-flower.png",
+  src = withAssetVersion("/images/cover-page/bottom-flower.png"),
   className,
   imgClassName = BOTTOM_FLOWER_CLASSNAMES,
   ariaHidden = true,

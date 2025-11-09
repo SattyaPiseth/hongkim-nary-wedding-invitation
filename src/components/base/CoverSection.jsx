@@ -3,6 +3,7 @@ import useCustomerByUuid from "../../hook/useCustomerByUuid";
 import CustomerNameInline from "../customer/CustomerNameInline";
 import AnimatedActionButton from "../button/AnimatedActionButton";
 import { renderNameWithFonts } from "../../utils/scriptRuns.jsx";
+import { withAssetVersion } from "../../utils/assetVersion.js";
 
 const cn = (...parts) => parts.filter(Boolean).join(" ");
 
@@ -79,7 +80,7 @@ export default function CoverSection({
         >
           <AnimatedActionButton
             onStart={onStart}
-            src="/images/border-styles/border-button.png"
+            src={withAssetVersion("/images/border-styles/border-button.png")}
             variant="bare"
             withShine
             withRipple

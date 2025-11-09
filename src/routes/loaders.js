@@ -1,4 +1,5 @@
 import { findCustomerByUuid, isValidUuidFormat } from "../lib/customers";
+import { withAssetVersion } from "../utils/assetVersion.js";
 
 const abs = (origin, path = "/") => {
   try {
@@ -23,7 +24,7 @@ export async function coverLoader({ params, request }) {
         description:
           "Join us in celebrating love. Ceremony details, schedule, map, and RSVP.",
         canonical: abs(origin, "/"),
-        image: "/images/seo/hongkim-nary.webp",
+        image: withAssetVersion("/images/seo/hongkim-nary.webp"),
         locale: "en_US",
         ogType: "website",
         updatedTime: new Date().toISOString(),
@@ -41,7 +42,7 @@ export async function coverLoader({ params, request }) {
         title: "Invitation not found",
         description: "This invite link is invalid or has expired.",
         canonical: abs(origin, "/"), // <- canonical to public page
-        image: "/images/seo/hongkim-nary.webp",
+        image: withAssetVersion("/images/seo/hongkim-nary.webp"),
         locale: "en_US",
         ogType: "website",
         updatedTime: new Date().toISOString(),
@@ -61,7 +62,7 @@ export async function coverLoader({ params, request }) {
         title: "Invitation not found",
         description: "This invite link is invalid or has expired.",
         canonical: abs(origin, "/"), // <- canonical to public page
-        image: "/images/seo/hongkim-nary.webp",
+        image: withAssetVersion("/images/seo/hongkim-nary.webp"),
         locale: "en_US",
         ogType: "website",
         updatedTime: new Date().toISOString(),
@@ -78,7 +79,7 @@ export async function coverLoader({ params, request }) {
       title: "Invitation",
       description: "Private invitation for the ceremony.",
       canonical: abs(origin, "/"), // <- canonical to public page
-      image: customer?.coverImageUrl ?? "/images/seo/hongkim-nary.webp",
+      image: withAssetVersion(customer?.coverImageUrl ?? "/images/seo/hongkim-nary.webp"),
       locale: customer?.locale ?? "km_KH",
       ogType: "website",
       updatedTime: new Date().toISOString(),

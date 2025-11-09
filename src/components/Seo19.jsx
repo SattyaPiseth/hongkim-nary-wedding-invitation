@@ -1,11 +1,12 @@
 import { useLocation } from "react-router-dom";
 import { useMemo } from "react";
+import { withAssetVersion } from "../utils/assetVersion.js";
 
 const DEFAULTS = {
   siteName: "Hongkim & Nary Wedding",
   title: "Hongkim & Nary Wedding — Save the Date",
   description: "Join us in celebrating love. Ceremony details, schedule, map, and RSVP.",
-  image: "/images/seo/hongkim-nary.webp",
+  image: withAssetVersion("/images/seo/hongkim-nary.webp"),
   imageAlt: "Hongkim & Nary Wedding Cover",
   themeColor: "#ffffff",
   ogType: "website",

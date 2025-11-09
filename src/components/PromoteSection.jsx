@@ -1,10 +1,11 @@
 import React, { useRef, useId, useMemo } from "react";
 import { motion, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
+import { withAssetVersion } from "../utils/assetVersion.js";
 
 const cn = (...a) => a.filter(Boolean).join(" ");
 
 export default function PromoteSection({
-  src = "/images/memora-shine/memora-shine-end-page.png",
+  src = withAssetVersion("/images/memora-shine/memora-shine-end-page.png"),
   alt = "សេចក្តីអបអរសាទរ ព្រមទាំងអញ្ជើញចូលរួមក្នុងពិធី",
   caption,
   className = "",

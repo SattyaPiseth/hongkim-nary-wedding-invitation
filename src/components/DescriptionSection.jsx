@@ -5,14 +5,16 @@ import { MasonryGallery } from "./gallery/MasonryGallery";
 import { Lightbox } from "./modal/Lightbox";
 
 import { GALLERY_IMAGES } from "../data/galleryImages";
-import morning_event_image from "/images/home-page/agenda/agenda-01.png";
-import afternoon_event_image from "/images/home-page/agenda/agenda-02.png";
 import { GratitudeSection } from "./GratitudeSection";
 import PromoteSection from "./PromoteSection";
 import Discussion from "./comment/Discussion";
 import AnimatedActionButton from "./button/AnimatedActionButton";
 import Spinner from "./button/Spinner";
 import { computeMasonryOrder } from "../utils/galleryLayout.js";
+import { withAssetVersion } from "../utils/assetVersion.js";
+
+const MORNING_EVENT_IMAGE = withAssetVersion("/images/home-page/agenda/agenda-01.png");
+const AFTERNOON_EVENT_IMAGE = withAssetVersion("/images/home-page/agenda/agenda-02.png");
 
 export default function DescriptionSection({
   // Customizable props with safe defaults
@@ -155,7 +157,7 @@ export default function DescriptionSection({
             <div className="flex justify-center mt-[1vh]">
               <img
                 className="w-[clamp(10rem,40vw,15rem)] max-w-3xl"
-                src="/images/border-styles/divider.avif"
+                src={withAssetVersion("/images/border-styles/divider.avif")}
                 alt="Divider Image"
                 loading="lazy"
                 decoding="async"
@@ -166,7 +168,7 @@ export default function DescriptionSection({
             {/* Bigger English gratitude image */}
             <div className="mx-auto my-[2vh] max-w-3xl flex justify-center" data-aos="fade-up">
               <img
-                src="/images/home-page/gratitude/gratitude-english.png"
+                src={withAssetVersion("/images/home-page/gratitude/gratitude-english.png")}
                 alt="Gratitude in English"
                 className="w-[clamp(20rem,90vw,50rem)] h-auto object-contain"
                 loading="lazy"
@@ -189,7 +191,7 @@ export default function DescriptionSection({
      data-aos-anchor-placement="top-center">
                 <div className="relative w-full aspect-3/4">
                   <img
-                    src="/images/home-page/gallary/portrait-17.jpg"
+                    src={withAssetVersion("/images/home-page/gallary/portrait-17.jpg")}
                     alt="image"
                     className="absolute inset-0 w-full h-full object-cover"
                     loading="lazy"
@@ -228,7 +230,7 @@ export default function DescriptionSection({
             </a> */}
             <AnimatedActionButton
               variant="bare"        
-              src="/images/home-page/map/location-button-01.png"
+              src={withAssetVersion("/images/home-page/map/location-button-01.png")}
               ariaLabel="បើកផែនទី"
               imgClassName="relative block mx-auto w-[70%] object-contain"
               withShine={true}
@@ -240,7 +242,7 @@ export default function DescriptionSection({
             />
 
             {/* map embed */}
-            <img src="/images/home-page/map/map.png" alt="Map of the Location" className="rounded-md shadow-sm mx-auto" data-aos="fade-up" loading="lazy" title="Map of the Location"/>
+            <img src={withAssetVersion("/images/home-page/map/map.png")} alt="Map of the Location" className="rounded-md shadow-sm mx-auto" data-aos="fade-up" loading="lazy" title="Map of the Location"/>
             {/* <div
               className="w-full aspect-video rounded-md overflow-hidden shadow-sm
                         mt-2 sm:mt-3"
@@ -271,7 +273,7 @@ export default function DescriptionSection({
 
             {/* Poster image */}
             <img
-              src={morning_event_image}
+              src={MORNING_EVENT_IMAGE}
               alt="Morning event"
               onLoad={() => setLoaded(true)}
               onError={() => setLoadError(true)}
@@ -284,7 +286,7 @@ export default function DescriptionSection({
         </figure>
 
         <figure className="-mt-[4.5rem]">
-          <img src={afternoon_event_image} className="scale-125" alt="Afternoon event" loading="lazy" decoding="async" />
+          <img src={AFTERNOON_EVENT_IMAGE} className="scale-125" alt="Afternoon event" loading="lazy" decoding="async" />
         </figure> 
 
         {/* Gallery */}
@@ -306,7 +308,7 @@ export default function DescriptionSection({
         <GratitudeSection />
         <Discussion />
         <PromoteSection
-          src="/images/memora-shine/memora-shine-end-page.png"
+          src={withAssetVersion("/images/memora-shine/memora-shine-end-page.png")}
           eager={true}                
           alt="Clean image"
           shadow=""                    

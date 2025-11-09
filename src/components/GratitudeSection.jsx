@@ -1,4 +1,5 @@
 import React from 'react'
+import { withAssetVersion } from "../utils/assetVersion.js";
 
 export const GratitudeSection = () => {
   return (
@@ -25,7 +26,7 @@ export const GratitudeSection = () => {
       <div className="flex justify-center" >
         <img
           className="w-[clamp(10rem,40vw,15rem)] max-w-screen-md"
-          src="/images/border-styles/divider.avif"
+          src={withAssetVersion("/images/border-styles/divider.avif")}
           alt="Divider"
           loading="lazy"
           decoding="async"

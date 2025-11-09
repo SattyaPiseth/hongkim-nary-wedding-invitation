@@ -4,27 +4,28 @@ import "aos/dist/aos.css";
 import AOS from "aos";
 import Seo19 from "./components/Seo19.jsx";
 import VideoLayer from "./components/video/VideoLayer.jsx";
+import { withAssetVersion } from "./utils/assetVersion.js";
 
 const Overlay = lazy(() => import("./components/base/Overlay.jsx"));
 const PlayMusic = lazy(() => import("./components/PlayMusic.jsx"));
 
 const toVideoSources = (webmPath, mp4Path) => [
-  { src: webmPath, type: "video/webm" },
-  ...(mp4Path ? [{ src: mp4Path, type: "video/mp4" }] : []),
+  { src: withAssetVersion(webmPath), type: "video/webm" },
+  ...(mp4Path ? [{ src: withAssetVersion(mp4Path), type: "video/mp4" }] : []),
 ];
 
 const STORY_VIDEOS = [
   {
-    src: "/videos/home.webm",
+    src: withAssetVersion("/videos/home.webm"),
     sources: toVideoSources("/videos/home.webm", "/videos/home.mp4"),
   },
 ];
-const BGMUSIC = "/audio/beautiful-in-white.mp3";
+const BGMUSIC = withAssetVersion("/audio/beautiful-in-white.mp3");
 
 const DEFAULT_BG = {
-  src: "/videos/background.webm",
+  src: withAssetVersion("/videos/background.webm"),
   sources: toVideoSources("/videos/background.webm", "/videos/background.mp4"),
-  poster: "/images/cover-page/background.webp",
+  poster: withAssetVersion("/images/cover-page/background.webp"),
   loop: true,
 };
 
@@ -39,16 +40,16 @@ const COVER_PAGE_DECORATIVE_SIZE = {
 
 const BG_BY_ROUTE = {
   "/": {
-    src: "/videos/background.webm",
+    src: withAssetVersion("/videos/background.webm"),
     sources: toVideoSources("/videos/background.webm", "/videos/background.mp4"),
-    poster: "/images/cover-page/background.webp",
+    poster: withAssetVersion("/images/cover-page/background.webp"),
     loop: true,
   },
-  
+
   "/home": {
-    src: "/videos/background.webm",
+    src: withAssetVersion("/videos/background.webm"),
     sources: toVideoSources("/videos/background.webm", "/videos/background.mp4"),
-    poster: "/images/cover-page/background.webp",
+    poster: withAssetVersion("/images/cover-page/background.webp"),
     loop: true,
   },
 };
@@ -64,9 +65,9 @@ const pickRouteBg = (pathname) => {
   if (BG_BY_ROUTE[pathname]) return BG_BY_ROUTE[pathname];
   if (isUuidPath(pathname)) {
     return {
-      src: "/videos/background.webm",
+      src: withAssetVersion("/videos/background.webm"),
       sources: toVideoSources("/videos/background.webm", "/videos/background.mp4"),
-      poster: "/images/cover-page/background.webp",
+      poster: withAssetVersion("/images/cover-page/background.webp"),
       loop: true,
     };
   }

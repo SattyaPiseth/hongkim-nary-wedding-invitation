@@ -1,3 +1,8 @@
+import { withAssetVersion } from "../utils/assetVersion.js";
+
+const PLAY_ICON = withAssetVersion("/images/svg/play-music.svg");
+const SOUND_OFF_ICON = withAssetVersion("/images/svg/sound-off.svg");
+const SOUND_ON_ICON = withAssetVersion("/images/svg/sound-on.svg");
 
 export default function PlayMusic({
   allowAudio,
@@ -47,7 +52,7 @@ export default function PlayMusic({
     >
       {!allowAudio ? (
         <img
-          src="/images/svg/play-music.svg"
+          src={PLAY_ICON}
           alt="open music"
           aria-hidden="true"
           className="h-5 w-5"
@@ -57,7 +62,7 @@ export default function PlayMusic({
         />
       ) : (
         <img
-          src={muted ? "/images/svg/sound-off.svg" : "/images/svg/sound-on.svg"}
+          src={muted ? SOUND_OFF_ICON : SOUND_ON_ICON}
           alt="sound on"
           aria-hidden="true"
           className="h-5 w-5"

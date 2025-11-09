@@ -5,6 +5,7 @@ import DescriptionSection from "../components/DescriptionSection";
 import ParentsSection from "../components/ParentsSection";
 import Heading from "../components/base/Heading";
 import DecorativeFooter from "../components/base/DecorativeFooter.jsx";
+import { withAssetVersion } from "../utils/assetVersion.js";
 
 export default function HomePage() {
   const outlet = useOutletContext() ?? {};
@@ -22,7 +23,11 @@ export default function HomePage() {
     };
     return [
       { ...base, "@type": "WebSite" },
-      { ...base, "@type": "Organization", logo: `${siteUrl}/images/landscape-04.jpg` },
+      {
+        ...base,
+        "@type": "Organization",
+        logo: withAssetVersion(`${siteUrl}/images/landscape-04.jpg`),
+      },
     ];
   }, [canonical, siteUrl]);
 

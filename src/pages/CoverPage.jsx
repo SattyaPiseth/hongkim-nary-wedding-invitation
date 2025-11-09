@@ -4,6 +4,7 @@ import Seo19 from "../components/Seo19.jsx";
 import CoverSection from "../components/base/CoverSection.jsx";
 import Spinner from "../components/button/Spinner.jsx";
 import DecorativeFooter from "../components/base/DecorativeFooter.jsx";
+import { withAssetVersion } from "../utils/assetVersion.js";
 
 const HERO_HEADING_CLASSNAMES = `
   m-auto max-w-[250px] w-full h-auto translate-y-12 min-[480px]:translate-y-0
@@ -53,6 +54,8 @@ const HERO_MONOGRAM_CLASSNAMES = `
 `;
 
 const ROBOTS_DIRECTIVE = "noindex, nofollow, noarchive";
+const HERO_HEADING_SRC = withAssetVersion("/images/cover-page/heading-cover-page.png");
+const HERO_MONOGRAM_SRC = withAssetVersion("/images/cover-page/monogram.png");
 
 export default function CoverPage() {
   const outlet = useOutletContext() ?? {};
@@ -143,14 +146,14 @@ function HeroArt() {
     <header className="relative z-10 -mt-[1.5rem]">
       <img
         className={HERO_HEADING_CLASSNAMES}
-        src="/images/cover-page/heading-cover-page.png"
+        src={HERO_HEADING_SRC}
         alt="heading"
       />
       <img
         width={681}
         height={383}
         className={HERO_MONOGRAM_CLASSNAMES}
-        src="/images/cover-page/monogram.png"
+        src={HERO_MONOGRAM_SRC}
         alt="hero section"
       />
     </header>

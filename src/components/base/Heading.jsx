@@ -2,7 +2,7 @@
 
 const cn = (...parts) => parts.filter(Boolean).join(" ");
 
-const DEFAULT_SRC = "/images/cover-page/heading-cover-page.png";
+const DEFAULT_SRC = "/images/cover-page/heading-cover-page.png?v=20251230v1";
 const IMAGE_CLASSES = [
   "block mx-auto h-auto select-none",
   "aspect-[414/207]",

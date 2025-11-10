@@ -3,6 +3,10 @@ export const config = { runtime: "edge" };
 const UUID_RX =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
+const DEFAULT_IMAGE_ALT = "Hongkim & Nary Wedding invitation cover";
+const DEFAULT_IMAGE_WIDTH = 854;
+const DEFAULT_IMAGE_HEIGHT = 1280;
+
 const esc = (s = "") =>
   s
     .replaceAll("&", "&amp;")
@@ -29,6 +33,14 @@ function withVersion(u, v = BUILD_ID) {
   }
 }
 
+function hostFromUrl(u = "") {
+  try {
+    return new URL(u).host;
+  } catch {
+    return "";
+  }
+}
+
 function noStoreHeaders() {
   return {
     "content-type": "text/html; charset=utf-8",
@@ -41,21 +53,36 @@ function render({
   title,
   description,
   canonical, // clean (no ?v) for SEO
-  ogUrl, // versioned share URL for bots
+  ogUrl, // share URL for bots
   image, // versioned image URL for bots
-  imageWidth = 1200,
-  imageHeight = 630,
+  imageAlt = DEFAULT_IMAGE_ALT,
+  imageWidth = DEFAULT_IMAGE_WIDTH,
+  imageHeight = DEFAULT_IMAGE_HEIGHT,
   imageType = "image/jpeg",
   locale = "km_KH",
   ogType = "website",
   noindex = false,
   updatedTime,
   jsonLd,
+  twitterUrl,
+  twitterDomain,
+  twitterSite,
+  twitterCard = "summary_large_image",
 }) {
   const robots = noindex
     ? "noindex,nofollow,max-image-preview:large"
     : "index,follow,max-image-preview:large";
   const secureImage = image.replace(/^http:\/\//i, "https://");
+  const shareUrl = ogUrl || canonical;
+  const twitterShareUrl = twitterUrl || shareUrl;
+  const twitterDomainValue = twitterDomain || hostFromUrl(shareUrl);
+  const twitterSiteTag = twitterSite
+    ? `<meta name="twitter:site" content="${esc(twitterSite)}" />`
+    : "";
+  const twitterDomainTag = twitterDomainValue
+    ? `<meta property="twitter:domain" content="${twitterDomainValue}" />`
+    : "";
+  const imageAltEsc = esc(imageAlt);
   const jsonLdTag = jsonLd
     ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`
     : "";
@@ -84,9 +111,10 @@ function render({
   <meta property="og:type" content="${ogType}" />
   <meta property="og:title" content="${esc(title)}" />
   <meta property="og:description" content="${esc(description)}" />
-  <meta property="og:url" content="${ogUrl || canonical}" />
+  <meta property="og:url" content="${shareUrl}" />
   <meta property="og:image" content="${image}" />
   <meta property="og:image:secure_url" content="${secureImage}" />
+  <meta property="og:image:alt" content="${imageAltEsc}" />
   <meta property="og:image:width" content="${imageWidth}" />
   <meta property="og:image:height" content="${imageHeight}" />
   <meta property="og:image:type" content="${esc(imageType)}" />
@@ -99,10 +127,14 @@ function render({
   }
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="${twitterCard}" />
+  ${twitterSiteTag}
+  <meta property="twitter:url" content="${twitterShareUrl}" />
+  ${twitterDomainTag}
   <meta name="twitter:title" content="${esc(title)}" />
   <meta name="twitter:description" content="${esc(description)}" />
   <meta name="twitter:image" content="${image}" />
+  <meta name="twitter:image:alt" content="${imageAltEsc}" />
 
   ${jsonLdTag}
 </head>
@@ -130,10 +162,10 @@ export default async function handler(req) {
   const path = url.pathname.replace(/\/+$/, "") || "/";
   const slug = path.slice(1);
 
-  // HOME – indexable + JSON-LD
+  // HOME -> indexable + JSON-LD
   if (path === "/") {
     const canonical = `${siteUrl}/`;
-    const ogUrl = withVersion(canonical);
+    const ogUrl = canonical;
     const imageV = withVersion(defaultImage);
 
     const site = {
@@ -183,12 +215,12 @@ export default async function handler(req) {
 
     return new Response(
       render({
-        title: "Home • Hongkim & Nary Wedding",
+        title: "Home \u2022 Hongkim & Nary Wedding",
         description:
           "Join us in celebrating love. Ceremony details, schedule, map, and RSVP.",
         canonical,
-        ogUrl, // versioned
-        image: imageV, // versioned
+        ogUrl,
+        image: imageV,
         locale: "km_KH",
         ogType: "website",
         updatedTime: nowIso,
@@ -198,19 +230,19 @@ export default async function handler(req) {
     );
   }
 
-  // UUID – always private (noindex), generic preview, canonical → root
+  // UUID -> always private (noindex), generic preview, canonical -> root
   if (UUID_RX.test(slug)) {
     const canonical = `${siteUrl}/`;
-    const ogUrl = withVersion(canonical);
+    const ogUrl = `${siteUrl}${path}`;
     const imageV = withVersion(defaultImage);
     const shouldNoIndex = !isFacebookBot; // let Facebook create previews while keeping invites private elsewhere
     return new Response(
       render({
-        title: "Invitation • Hongkim & Nary Wedding",
+        title: "Invitation \u2022 Hongkim & Nary Wedding",
         description: "Private invitation for the ceremony.",
         canonical,
-        ogUrl, // versioned
-        image: imageV, // versioned
+        ogUrl,
+        image: imageV,
         locale: "km_KH",
         ogType: "website",
         updatedTime: nowIso,
@@ -224,7 +256,7 @@ export default async function handler(req) {
   // Fallback
   {
     const canonical = `${siteUrl}/`;
-    const ogUrl = withVersion(canonical);
+    const ogUrl = canonical;
     const imageV = withVersion(defaultImage);
     return new Response(
       render({
@@ -232,8 +264,8 @@ export default async function handler(req) {
         description:
           "Join us in celebrating love. Ceremony details, schedule, map, and RSVP.",
         canonical,
-        ogUrl, // versioned
-        image: imageV, // versioned
+        ogUrl,
+        image: imageV,
         locale: "km_KH",
         ogType: "website",
         updatedTime: nowIso,

@@ -4,10 +4,13 @@ import { withAssetVersion } from "../utils/assetVersion.js";
 
 const DEFAULTS = {
   siteName: "Hongkim & Nary Wedding",
-  title: "Hongkim & Nary Wedding — Save the Date",
+  title: "Hongkim & Nary Wedding \u2014 Save the Date",
   description: "Join us in celebrating love. Ceremony details, schedule, map, and RSVP.",
   image: withAssetVersion("/images/seo/hongkim-nary.jpg"),
-  imageAlt: "Hongkim & Nary Wedding Cover",
+  imageAlt: "Hongkim & Nary Wedding invitation cover",
+  imageWidth: 854,
+  imageHeight: 1280,
+  imageType: "image/jpeg",
   themeColor: "#ffffff",
   ogType: "website",
   twitterCard: "summary_large_image",
@@ -22,6 +25,14 @@ const absUrl = (path = "/") => {
     return new URL(path, BASE_URL).href;
   } catch {
     return path;
+  }
+};
+
+const hostFromUrl = (input = "") => {
+  try {
+    return new URL(input).host;
+  } catch {
+    return "";
   }
 };
 
@@ -42,9 +53,11 @@ export default function Seo19({
   description,
   image = DEFAULTS.image,
   imageAlt = DEFAULTS.imageAlt,
-  imageWidth,
-  imageHeight,
+  imageWidth = DEFAULTS.imageWidth,
+  imageHeight = DEFAULTS.imageHeight,
+  imageType = DEFAULTS.imageType,
   canonical,
+  ogUrl,
 
   // indexing flags
   noindex = false,
@@ -67,29 +80,47 @@ export default function Seo19({
 
   // social extras
   twitterSite,
+  twitterDomain,
+  twitterUrl,
   ogLocaleAlternates = [],
 
   // crawler-specific + freshness
-  googleBot,    // e.g., "noindex, nofollow, noarchive"
-  bingBot,      // same
-  updatedTime,  // ISO 8601
+  googleBot, // e.g., "noindex, nofollow, noarchive"
+  bingBot, // same
+  updatedTime, // ISO 8601
 
   children,
 }) {
   const loc = useLocation();
   const currentPath = path ?? loc.pathname;
+  const canonicalTarget = canonical || absUrl(currentPath);
 
   const pageUrl = useMemo(
-    () => normalizeCanonical(canonical || absUrl(currentPath)),
-    [canonical, currentPath]
+    () => normalizeCanonical(canonicalTarget),
+    [canonicalTarget]
   );
 
-  // const pageTitle = title ? `${title} • ${siteName}` : DEFAULTS.title;
+  const openGraphUrl = useMemo(
+    () =>
+      normalizeCanonical(
+        ogUrl ? absUrl(ogUrl) : canonicalTarget
+      ),
+    [ogUrl, canonicalTarget]
+  );
+
+  const twitterShareUrl = useMemo(
+    () =>
+      twitterUrl ? normalizeCanonical(absUrl(twitterUrl)) : openGraphUrl,
+    [twitterUrl, openGraphUrl]
+  );
+
+  // const pageTitle = title ? `${title} \u2022 ${siteName}` : DEFAULTS.title;
   const pageTitle = title || DEFAULTS.title;
   const pageDesc = description || DEFAULTS.description;
 
   const imageUrl = absUrl(image);
   const imageSecureUrl = imageUrl.replace(/^http:\/\//i, "https://");
+  const twitterDomainValue = twitterDomain || hostFromUrl(twitterShareUrl);
 
   const robots = useMemo(
     () =>
@@ -121,12 +152,17 @@ export default function Seo19({
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={pageDesc} />
-      <meta property="og:url" content={pageUrl} />
+      <meta property="og:url" content={openGraphUrl} />
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:secure_url" content={imageSecureUrl} />
       <meta property="og:image:alt" content={imageAlt} />
-      {imageWidth && <meta property="og:image:width" content={String(imageWidth)} />}
-      {imageHeight && <meta property="og:image:height" content={String(imageHeight)} />}
+      {imageWidth && (
+        <meta property="og:image:width" content={String(imageWidth)} />
+      )}
+      {imageHeight && (
+        <meta property="og:image:height" content={String(imageHeight)} />
+      )}
+      <meta property="og:image:type" content={imageType} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:locale" content={locale} />
       {ogLocaleAlternates.map((l) => (
@@ -137,6 +173,10 @@ export default function Seo19({
       {/* Twitter */}
       <meta name="twitter:card" content={twitterCard} />
       {twitterSite && <meta name="twitter:site" content={twitterSite} />}
+      <meta property="twitter:url" content={twitterShareUrl} />
+      {twitterDomainValue && (
+        <meta property="twitter:domain" content={twitterDomainValue} />
+      )}
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDesc} />
       <meta name="twitter:image" content={imageUrl} />

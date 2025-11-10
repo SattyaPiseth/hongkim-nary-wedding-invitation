@@ -115,6 +115,8 @@ function render({
 export default async function handler(req) {
   const url = new URL(req.url);
   const nowIso = new Date().toISOString();
+  const userAgent = (req.headers.get("user-agent") || "").toLowerCase();
+  const isFacebookBot = /facebookexternalhit|facebot/i.test(userAgent);
 
   // Prefer production canonical host
   const base =
@@ -201,6 +203,7 @@ export default async function handler(req) {
     const canonical = `${siteUrl}/`;
     const ogUrl = withVersion(canonical);
     const imageV = withVersion(defaultImage);
+    const shouldNoIndex = !isFacebookBot; // let Facebook create previews while keeping invites private elsewhere
     return new Response(
       render({
         title: "Invitation • Hongkim & Nary Wedding",
@@ -211,7 +214,7 @@ export default async function handler(req) {
         locale: "km_KH",
         ogType: "website",
         updatedTime: nowIso,
-        noindex: true,
+        noindex: shouldNoIndex,
         jsonLd: null,
       }),
       { status: 200, headers: noStoreHeaders() }

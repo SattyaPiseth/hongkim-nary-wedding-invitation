@@ -43,6 +43,9 @@ function render({
   canonical, // clean (no ?v) for SEO
   ogUrl, // versioned share URL for bots
   image, // versioned image URL for bots
+  imageWidth = 1200,
+  imageHeight = 630,
+  imageType = "image/jpeg",
   locale = "km_KH",
   ogType = "website",
   noindex = false,
@@ -84,6 +87,9 @@ function render({
   <meta property="og:url" content="${ogUrl || canonical}" />
   <meta property="og:image" content="${image}" />
   <meta property="og:image:secure_url" content="${secureImage}" />
+  <meta property="og:image:width" content="${imageWidth}" />
+  <meta property="og:image:height" content="${imageHeight}" />
+  <meta property="og:image:type" content="${esc(imageType)}" />
   <meta property="og:site_name" content="Hongkim & Nary Wedding" />
   <meta property="og:locale" content="${locale}" />
   ${

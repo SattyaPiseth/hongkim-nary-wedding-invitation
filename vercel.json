@@ -23,7 +23,7 @@
     {
       "src": "^/$",
       "has": [
-        { "type": "header", "key": "user-agent", "value": "(?i)(Twitterbot|facebookexternalhit|LinkedInBot|Slackbot|WhatsApp|TelegramBot|Pinterest|Discordbot|Google-InspectionTool|Googlebot|Bingbot|DuckDuckBot)" }
+        { "type": "header", "key": "user-agent", "value": "(?i).*(Twitterbot|facebookexternalhit|LinkedInBot|Slackbot|WhatsApp|TelegramBot|Pinterest|Discordbot|Google-InspectionTool|Googlebot|Bingbot|DuckDuckBot).*" }
       ],
       "dest": "api/ssr-meta.js",
       "headers": {
@@ -35,7 +35,7 @@
     {
       "src": "^/([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$",
       "has": [
-        { "type": "header", "key": "user-agent", "value": "(?i)(Twitterbot|facebookexternalhit|LinkedInBot|Slackbot|WhatsApp|TelegramBot|Pinterest|Discordbot|Google-InspectionTool|Googlebot|Bingbot|DuckDuckBot)" }
+        { "type": "header", "key": "user-agent", "value": "(?i).*(Twitterbot|facebookexternalhit|LinkedInBot|Slackbot|WhatsApp|TelegramBot|Pinterest|Discordbot|Google-InspectionTool|Googlebot|Bingbot|DuckDuckBot).*" }
       ],
       "dest": "api/ssr-meta.js",
       "headers": {
@@ -47,7 +47,7 @@
     {
       "src": "^/(invite|guest)/[A-Za-z0-9-]{6,}$",
       "has": [
-        { "type": "header", "key": "user-agent", "value": "(?i)(Twitterbot|facebookexternalhit|LinkedInBot|Slackbot|WhatsApp|TelegramBot|Pinterest|Discordbot|Google-InspectionTool|Googlebot|Bingbot|DuckDuckBot)" }
+        { "type": "header", "key": "user-agent", "value": "(?i).*(Twitterbot|facebookexternalhit|LinkedInBot|Slackbot|WhatsApp|TelegramBot|Pinterest|Discordbot|Google-InspectionTool|Googlebot|Bingbot|DuckDuckBot).*" }
       ],
       "dest": "api/ssr-meta.js",
       "headers": {
